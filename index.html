@@ -31,10 +31,10 @@
       --shadow: 0 4px 12px rgba(0,0,0,0.4);
     }
 
-    /* === 基本設定 === */
+    /* === 動畫過渡設定 === */
     * {
       box-sizing: border-box;
-      transition: 
+      transition:
         background-color var(--transition-speed) ease,
         color var(--transition-speed) ease,
         border-color var(--transition-speed) ease,
@@ -122,12 +122,30 @@
       text-decoration: underline;
     }
 
+    a[href*="linkedin.com"]:hover {
+      color: #0a66c2; /* LinkedIn 藍 */
+    }
+
     /* === 頁尾 === */
     footer {
       text-align: center;
       padding: 25px 10px 40px;
       color: #888;
       font-size: 0.9em;
+    }
+
+    /* === LinkedIn Footer Icon === */
+    .social-links a {
+      display: inline-block;
+      margin: 0 8px;
+      font-size: 1.3em;
+      color: var(--text-gray);
+      transition: color 0.3s ease, transform 0.2s ease;
+    }
+
+    .social-links a:hover {
+      color: #0a66c2;
+      transform: scale(1.15);
     }
 
     /* === 深色模式按鈕 === */
@@ -212,14 +230,18 @@
       </p>
       <p>
         Or connect with me on 
-        <a href="https://www.linkedin.com/in/shih-ting-huang/" target="_blank" rel="noopener noreferrer">
+        <a href="https://www.linkedin.com/in/hstna/" target="_blank" rel="noopener noreferrer">
           💼 LinkedIn
         </a>.
       </p>
-</section>
+    </section>
   </main>
 
   <footer>
+    <div class="social-links">
+      <a href="https://www.linkedin.com/in/hstna/" target="_blank" title="LinkedIn" rel="noopener noreferrer">💼</a>
+      <a href="https://github.com/hstna" target="_blank" title="GitHub" rel="noopener noreferrer">🐙</a>
+    </div>
     <p>© 2025 HSTNA. Built with ❤️ using GitHub Pages.</p>
   </footer>
 
@@ -229,7 +251,7 @@
     const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
     const currentTheme = localStorage.getItem('theme');
 
-    // 預設主題
+    // 預設主題設定
     if (currentTheme === 'dark' || (!currentTheme && prefersDarkScheme.matches)) {
       document.documentElement.setAttribute('data-theme', 'dark');
       toggleBtn.textContent = '☀️';
