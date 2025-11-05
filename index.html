@@ -9,15 +9,36 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 
   <style>
-    /* === 全域設定 === */
+    /* === 全域變數 === */
     :root {
       --bg-light: #f5f7fa;
       --bg-white: #ffffff;
       --text-dark: #2c3e50;
       --text-gray: #555;
-      --primary: #3b82f6; /* 柔和藍 */
+      --primary: #3b82f6;
       --shadow: 0 4px 12px rgba(0,0,0,0.08);
       --radius: 12px;
+      --transition-speed: 0.5s;
+    }
+
+    /* === 深色模式變數 === */
+    [data-theme="dark"] {
+      --bg-light: #1e1e1e;
+      --bg-white: #2b2b2b;
+      --text-dark: #e5e5e5;
+      --text-gray: #cfcfcf;
+      --primary: #60a5fa;
+      --shadow: 0 4px 12px rgba(0,0,0,0.4);
+    }
+
+    /* === 基本設定 === */
+    * {
+      box-sizing: border-box;
+      transition: 
+        background-color var(--transition-speed) ease,
+        color var(--transition-speed) ease,
+        border-color var(--transition-speed) ease,
+        box-shadow var(--transition-speed) ease;
     }
 
     body {
@@ -49,10 +70,10 @@
 
     header p {
       font-size: 1.15em;
-      color: #666;
+      color: var(--text-gray);
     }
 
-    /* === 主內容區 === */
+    /* === 主內容 === */
     main {
       max-width: 850px;
       margin: 60px auto;
@@ -70,7 +91,7 @@
 
     section:hover {
       transform: translateY(-4px);
-      box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
     }
 
     h2 {
@@ -109,18 +130,56 @@
       font-size: 0.9em;
     }
 
-    /* === 響應式調整 (RWD) === */
+    /* === 深色模式按鈕 === */
+    #theme-toggle {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background-color: var(--primary);
+      color: #fff;
+      border: none;
+      border-radius: 50%;
+      width: 42px;
+      height: 42px;
+      font-size: 20px;
+      cursor: pointer;
+      box-shadow: var(--shadow);
+      transition: background-color 0.3s ease, transform 0.2s ease;
+      z-index: 100;
+    }
+
+    #theme-toggle:hover {
+      background-color: #2563eb;
+      transform: scale(1.05);
+    }
+
+    /* === RWD 響應式調整 === */
     @media (max-width: 600px) {
+      header {
+        padding: 60px 10px 30px;
+      }
+
       header h1 {
         font-size: 2em;
       }
+
       section {
         padding: 30px 20px;
+      }
+
+      #theme-toggle {
+        width: 38px;
+        height: 38px;
+        top: 15px;
+        right: 15px;
       }
     }
   </style>
 </head>
 <body>
+
+  <!-- 深色模式切換按鈕 -->
+  <button id="theme-toggle" title="Toggle dark mode">🌙</button>
 
   <header>
     <h1>👋 Hi, I’m Shih-Ting Huang</h1>
@@ -156,6 +215,33 @@
   <footer>
     <p>© 2025 HSTNA. Built with ❤️ using GitHub Pages.</p>
   </footer>
+
+  <!-- === 深色模式切換腳本 === -->
+  <script>
+    const toggleBtn = document.getElementById('theme-toggle');
+    const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+    const currentTheme = localStorage.getItem('theme');
+
+    // 預設主題
+    if (currentTheme === 'dark' || (!currentTheme && prefersDarkScheme.matches)) {
+      document.documentElement.setAttribute('data-theme', 'dark');
+      toggleBtn.textContent = '☀️';
+    }
+
+    // 點擊切換
+    toggleBtn.addEventListener('click', () => {
+      const theme = document.documentElement.getAttribute('data-theme');
+      if (theme === 'dark') {
+        document.documentElement.removeAttribute('data-theme');
+        localStorage.setItem('theme', 'light');
+        toggleBtn.textContent = '🌙';
+      } else {
+        document.documentElement.setAttribute('data-theme', 'dark');
+        localStorage.setItem('theme', 'dark');
+        toggleBtn.textContent = '☀️';
+      }
+    });
+  </script>
 
 </body>
 </html>
