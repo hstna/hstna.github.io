@@ -3,54 +3,120 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>HSTNA | Portfolio</title>
+  <title>ST Huang | Portfolio</title>
+ 
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+
   <style>
+    /* === 全域設定 === */
+    :root {
+      --bg-light: #f5f7fa;
+      --bg-white: #ffffff;
+      --text-dark: #2c3e50;
+      --text-gray: #555;
+      --primary: #3b82f6; /* 柔和藍 */
+      --shadow: 0 4px 12px rgba(0,0,0,0.08);
+      --radius: 12px;
+    }
+
     body {
-      font-family: "Segoe UI", Arial, sans-serif;
-      background-color: #f5f7fa;
-      color: #333;
+      font-family: "Inter", "Segoe UI", Arial, sans-serif;
+      background: linear-gradient(180deg, var(--bg-light) 0%, #eef2f6 100%);
+      color: var(--text-gray);
       margin: 0;
       padding: 0;
+      line-height: 1.7;
     }
+
+    /* === 頂部區域 === */
     header {
       text-align: center;
-      padding: 60px 20px 30px;
+      padding: 80px 20px 40px;
+      background-color: var(--bg-white);
+      box-shadow: var(--shadow);
+      position: sticky;
+      top: 0;
+      z-index: 10;
     }
+
     header h1 {
-      font-size: 2.5em;
-      color: #2c3e50;
+      font-size: 2.8em;
+      color: var(--text-dark);
       margin-bottom: 10px;
+      letter-spacing: -0.5px;
     }
+
     header p {
-      color: #555;
-      font-size: 1.1em;
+      font-size: 1.15em;
+      color: #666;
     }
+
+    /* === 主內容區 === */
+    main {
+      max-width: 850px;
+      margin: 60px auto;
+      padding: 0 20px;
+    }
+
     section {
-      max-width: 800px;
-      margin: 40px auto;
-      padding: 20px;
-      background-color: #fff;
-      border-radius: 12px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      background-color: var(--bg-white);
+      border-radius: var(--radius);
+      padding: 40px 30px;
+      margin-bottom: 40px;
+      box-shadow: var(--shadow);
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
     }
+
+    section:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+    }
+
     h2 {
-      color: #2c3e50;
-      border-bottom: 2px solid #e5e8ec;
-      padding-bottom: 10px;
+      color: var(--text-dark);
+      border-left: 6px solid var(--primary);
+      padding-left: 14px;
+      margin-bottom: 20px;
+      font-size: 1.5em;
     }
+
+    ul {
+      list-style-type: none;
+      padding-left: 0;
+    }
+
+    li {
+      margin-bottom: 10px;
+      font-size: 1.05em;
+    }
+
     a {
-      color: #0078d7;
+      color: var(--primary);
       text-decoration: none;
+      font-weight: 500;
     }
+
     a:hover {
       text-decoration: underline;
     }
+
+    /* === 頁尾 === */
     footer {
       text-align: center;
-      padding: 20px;
-      color: #777;
+      padding: 25px 10px 40px;
+      color: #888;
       font-size: 0.9em;
-      margin-top: 50px;
+    }
+
+    /* === 響應式調整 (RWD) === */
+    @media (max-width: 600px) {
+      header h1 {
+        font-size: 2em;
+      }
+      section {
+        padding: 30px 20px;
+      }
     }
   </style>
 </head>
@@ -61,29 +127,31 @@
     <p>Welcome to my personal GitHub Page.</p>
   </header>
 
-  <section id="about">
-    <h2>About</h2>
-    <p>
-      I’m currently studying Computer Science and exploring topics like Python, web development, and data structures. 
-      This page is my personal space for sharing projects and learning notes.
-    </p>
-  </section>
+  <main>
+    <section id="about">
+      <h2>About</h2>
+      <p>
+        I’m currently studying Computer Science and exploring topics like Python, web development, and data structures.
+        This page is my personal space for sharing projects and learning notes.
+      </p>
+    </section>
 
-  <section id="projects">
-    <h2>Projects</h2>
-    <ul>
-      <li><a href="https://github.com/hstna">My GitHub Repositories</a></li>
-      <li><a href="#">Sample Project 1</a> – a small coding project I’m working on.</li>
-      <li><a href="#">Sample Project 2</a> – more updates coming soon!</li>
-    </ul>
-  </section>
+    <section id="projects">
+      <h2>Projects</h2>
+      <ul>
+        <li><a href="https://github.com/hstna">My GitHub Repositories</a></li>
+        <li><a href="#">Sample Project 1</a> — a small coding project I’m working on.</li>
+        <li><a href="#">Sample Project 2</a> — more updates coming soon!</li>
+      </ul>
+    </section>
 
-  <section id="contact">
-    <h2>Contact</h2>
-    <p>
-      You can reach me via email at <a href="mailto:example@email.com">example@email.com</a>.
-    </p>
-  </section>
+    <section id="contact">
+      <h2>Contact</h2>
+      <p>
+        You can reach me via email at <a href="mailto:sthuangna@email.com">sthuangna@email.com</a>.
+      </p>
+    </section>
+  </main>
 
   <footer>
     <p>© 2025 HSTNA. Built with ❤️ using GitHub Pages.</p>
