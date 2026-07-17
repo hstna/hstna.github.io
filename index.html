@@ -7,506 +7,562 @@
   <meta name="description" content="Shih-Ting Huang — M.S. Computer Science student at Northeastern University with 6 years building automation, data integration, and analytics solutions for supply chain operations." />
   <meta name="author" content="Shih-Ting Huang" />
 
-  <!-- Open Graph（分享到 LinkedIn / FB 時的預覽卡） -->
+  <!-- Open Graph -->
   <meta property="og:title" content="Shih-Ting Huang | Portfolio" />
   <meta property="og:description" content="Automation, data integration & analytics engineer · M.S. Computer Science @ Northeastern University" />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://hstna.github.io/" />
 
-  <!-- Favicon（用 emoji 當分頁小圖示，免額外檔案） -->
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>👋</text></svg>" />
 
-  <!-- Google Font -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
 
   <style>
-    /* === 全域變數 === */
+    /* ============ 變數 ============ */
     :root {
-      --bg-light: #f5f7fa;
-      --bg-white: #ffffff;
-      --text-dark: #2c3e50;
-      --text-gray: #555;
-      --text-muted: #888;
-      --primary: #3b82f6;
-      --primary-dark: #2563eb;
-      --accent: #10b981;          /* 學歷用的綠色 */
-      --border: #e5e9f0;
-      --shadow: 0 4px 12px rgba(0,0,0,0.08);
-      --radius: 12px;
-      --transition-speed: 0.4s;
+      --bg: #f4f6fb;
+      --surface: #ffffff;
+      --surface-2: #f8fafc;
+      --text-dark: #0f172a;
+      --text: #334155;
+      --text-muted: #64748b;
+      --border: #e6eaf2;
+
+      --primary: #6366f1;
+      --primary-2: #3b82f6;
+      --cyan: #06b6d4;
+      --accent: #10b981;
+
+      --grad: linear-gradient(120deg, #6366f1 0%, #3b82f6 45%, #06b6d4 100%);
+      --grad-text: linear-gradient(120deg, #6366f1, #06b6d4);
+
+      --radius: 16px;
+      --shadow: 0 10px 30px -12px rgba(30, 41, 90, 0.18);
+      --shadow-hover: 0 22px 44px -18px rgba(59, 96, 220, 0.38);
+      --tspeed: 0.4s;
     }
 
-    /* === 深色模式變數 === */
     [data-theme="dark"] {
-      --bg-light: #1e1e1e;
-      --bg-white: #2b2b2b;
-      --text-dark: #e5e5e5;
-      --text-gray: #cfcfcf;
-      --text-muted: #9a9a9a;
-      --primary: #60a5fa;
-      --primary-dark: #3b82f6;
+      --bg: #0b1120;
+      --surface: #131c31;
+      --surface-2: #1a2540;
+      --text-dark: #f1f5f9;
+      --text: #cbd5e1;
+      --text-muted: #8494ad;
+      --border: #243252;
+
+      --primary: #818cf8;
+      --primary-2: #60a5fa;
+      --cyan: #22d3ee;
       --accent: #34d399;
-      --border: #3a3a3a;
-      --shadow: 0 4px 12px rgba(0,0,0,0.4);
+
+      --grad: linear-gradient(120deg, #818cf8 0%, #60a5fa 45%, #22d3ee 100%);
+      --grad-text: linear-gradient(120deg, #a5b4fc, #67e8f9);
+
+      --shadow: 0 10px 30px -12px rgba(0, 0, 0, 0.6);
+      --shadow-hover: 0 22px 50px -18px rgba(0, 0, 0, 0.7);
     }
 
     * { box-sizing: border-box; }
 
-    /* 只針對主題切換相關屬性做過渡，避免拖慢 hover */
-    body, header, section, .card, .chip, #theme-toggle, .timeline-content {
-      transition:
-        background-color var(--transition-speed) ease,
-        color var(--transition-speed) ease,
-        border-color var(--transition-speed) ease;
-    }
+    html { scroll-behavior: smooth; }
 
     body {
       font-family: "Inter", "Segoe UI", Arial, sans-serif;
-      background: linear-gradient(180deg, var(--bg-light) 0%, var(--bg-light) 100%);
-      color: var(--text-gray);
+      background: var(--bg);
+      color: var(--text);
       margin: 0;
-      padding: 0;
       line-height: 1.7;
+      overflow-x: hidden;
+      transition: background-color var(--tspeed) ease, color var(--tspeed) ease;
     }
 
-    /* === Hero 頂部區域 === */
-    header {
-      text-align: center;
-      padding: 90px 20px 70px;
-      background-color: var(--bg-white);
-      box-shadow: var(--shadow);
+    h1, h2, h3, h4, .stat-num, .nav-brand {
+      font-family: "Space Grotesk", "Inter", sans-serif;
     }
 
-    header h1 {
-      font-size: 2.8em;
-      color: var(--text-dark);
-      margin: 0 0 12px;
-      letter-spacing: -0.5px;
-    }
-
-    header .tagline {
-      font-size: 1.15em;
-      color: var(--text-gray);
-      max-width: 640px;
-      margin: 0 auto 24px;
-    }
-
-    header .location {
-      color: var(--text-muted);
-      font-size: 0.95em;
-      margin: 0 0 24px;
-    }
-
-    /* Hero 按鈕組 */
-    .hero-actions {
-      display: flex;
-      gap: 12px;
-      justify-content: center;
-      flex-wrap: wrap;
-    }
-
-    .btn {
-      display: inline-block;
-      padding: 10px 22px;
-      border-radius: 999px;
-      font-weight: 600;
-      font-size: 0.95em;
-      text-decoration: none;
-      transition: transform 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
-    }
-
-    .btn-primary {
-      background-color: var(--primary);
-      color: #fff;
-    }
-    .btn-primary:hover {
-      background-color: var(--primary-dark);
-      transform: translateY(-2px);
-      box-shadow: var(--shadow);
-    }
-
-    .btn-outline {
-      border: 2px solid var(--primary);
-      color: var(--primary);
-    }
-    .btn-outline:hover {
-      background-color: var(--primary);
-      color: #fff;
-      transform: translateY(-2px);
-    }
-
-    /* === 主內容 === */
-    main {
-      max-width: 850px;
-      margin: 60px auto;
-      padding: 0 20px;
-    }
-
-    section {
-      background-color: var(--bg-white);
-      border-radius: var(--radius);
-      padding: 40px 34px;
-      margin-bottom: 36px;
-      box-shadow: var(--shadow);
-    }
-
-    h2 {
-      color: var(--text-dark);
-      border-left: 6px solid var(--primary);
-      padding-left: 14px;
-      margin: 0 0 24px;
-      font-size: 1.5em;
-    }
-
-    section p { margin-top: 0; }
-
-    a {
-      color: var(--primary);
-      text-decoration: none;
-      font-weight: 500;
-    }
+    a { color: var(--primary-2); text-decoration: none; }
     a:hover { text-decoration: underline; }
 
-    /* === Timeline 時間軸 === */
-    .timeline {
-      position: relative;
-      padding-left: 34px;
-    }
-
-    /* 垂直的線 */
-    .timeline::before {
-      content: "";
-      position: absolute;
-      left: 7px;
-      top: 6px;
-      bottom: 6px;
-      width: 2px;
-      background: var(--border);
-    }
-
-    .timeline-item {
-      position: relative;
-      padding-bottom: 34px;
-    }
-    .timeline-item:last-child { padding-bottom: 0; }
-
-    /* 線上的圓點 */
-    .timeline-item::before {
-      content: "";
-      position: absolute;
-      left: -34px;
-      top: 4px;
-      width: 16px;
-      height: 16px;
-      border-radius: 50%;
-      background: var(--primary);
-      border: 3px solid var(--bg-white);
-      box-shadow: 0 0 0 2px var(--primary);
-    }
-    /* 學歷用綠色圓點 */
-    .timeline-item.education::before {
-      background: var(--accent);
-      box-shadow: 0 0 0 2px var(--accent);
-    }
-
-    .timeline-date {
-      font-size: 0.85em;
-      font-weight: 600;
-      color: var(--text-muted);
-      letter-spacing: 0.3px;
-      margin-bottom: 4px;
-    }
-
-    .timeline-title {
-      font-size: 1.15em;
-      font-weight: 700;
-      color: var(--text-dark);
-      margin: 0;
-    }
-
-    .timeline-subtitle {
-      color: var(--text-gray);
-      font-weight: 500;
-      margin: 2px 0 10px;
-    }
-    .timeline-subtitle .loc { color: var(--text-muted); font-weight: 400; }
-
-    .timeline-content ul {
-      margin: 8px 0 0;
-      padding-left: 18px;
-    }
-    .timeline-content li {
-      margin-bottom: 6px;
-      font-size: 0.97em;
-    }
-
-    /* 分類標籤 chip */
-    .chip {
-      display: inline-block;
-      font-size: 0.72em;
-      font-weight: 600;
-      padding: 2px 10px;
-      border-radius: 999px;
-      margin-left: 8px;
-      vertical-align: middle;
-      letter-spacing: 0.5px;
-      text-transform: uppercase;
-    }
-    .chip-work { background: rgba(59,130,246,0.14); color: var(--primary); }
-    .chip-edu  { background: rgba(16,185,129,0.16); color: var(--accent); }
-
-    /* === Projects 卡片 === */
-    .projects-grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 18px;
-    }
-
-    .card {
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 22px 24px;
-      background: var(--bg-white);
-    }
-    .card:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 8px 20px rgba(0,0,0,0.10);
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
-    }
-
-    .card-head {
+    /* ============ 導覽列 ============ */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 50;
       display: flex;
       justify-content: space-between;
-      align-items: baseline;
-      gap: 12px;
-      flex-wrap: wrap;
+      align-items: center;
+      padding: 14px 24px;
+      background: color-mix(in srgb, var(--surface) 78%, transparent);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
     }
-    .card h3 {
-      margin: 0;
-      font-size: 1.1em;
+    .nav-brand {
+      font-weight: 700;
+      font-size: 1.05em;
       color: var(--text-dark);
+      letter-spacing: -0.3px;
     }
-    .card .card-date {
-      font-size: 0.82em;
-      color: var(--text-muted);
-      white-space: nowrap;
+    .nav-brand span {
+      background: var(--grad-text);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
-    .card .card-context {
-      color: var(--primary);
-      font-size: 0.88em;
-      font-weight: 500;
-      margin: 4px 0 10px;
-    }
-    .card ul { margin: 0; padding-left: 18px; }
-    .card li { margin-bottom: 6px; font-size: 0.95em; }
-
-    /* === Skills === */
-    .skill-group { margin-bottom: 18px; }
-    .skill-group:last-child { margin-bottom: 0; }
-    .skill-group h4 {
-      margin: 0 0 8px;
-      color: var(--text-dark);
-      font-size: 1em;
-    }
-    .tags { display: flex; flex-wrap: wrap; gap: 8px; }
-    .tag {
-      background: var(--bg-light);
-      border: 1px solid var(--border);
-      color: var(--text-gray);
-      padding: 5px 12px;
-      border-radius: 999px;
-      font-size: 0.88em;
-    }
-
-    /* === Contact === */
-    .contact-list { list-style: none; padding: 0; margin: 0; }
-    .contact-list li { margin-bottom: 10px; font-size: 1.02em; }
-
-    /* === 頁尾 === */
-    footer {
-      text-align: center;
-      padding: 25px 10px 40px;
+    .nav-links { display: flex; gap: 4px; align-items: center; }
+    .nav-links a {
       color: var(--text-muted);
       font-size: 0.9em;
+      font-weight: 500;
+      padding: 6px 12px;
+      border-radius: 8px;
+      transition: color 0.2s, background 0.2s;
     }
-    .social-links a {
-      display: inline-block;
-      margin: 0 8px;
-      font-size: 1.4em;
-      transition: transform 0.2s ease;
-    }
-    .social-links a:hover { transform: scale(1.18); }
+    .nav-links a:hover { color: var(--text-dark); background: var(--surface-2); text-decoration: none; }
+    @media (max-width: 640px) { .nav-links a:not(.nav-cta) { display: none; } }
 
-    /* === 深色模式按鈕 === */
+    .nav-cta {
+      background: var(--grad);
+      color: #fff !important;
+    }
+    .nav-cta:hover { opacity: 0.92; }
+
     #theme-toggle {
-      position: fixed;
-      top: 20px;
-      right: 20px;
-      background-color: var(--primary);
-      color: #fff;
-      border: none;
-      border-radius: 50%;
-      width: 44px;
-      height: 44px;
-      font-size: 20px;
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      color: var(--text-dark);
+      border-radius: 10px;
+      width: 38px; height: 38px;
+      font-size: 17px;
       cursor: pointer;
-      box-shadow: var(--shadow);
-      transition: background-color 0.3s ease, transform 0.2s ease;
-      z-index: 100;
+      margin-left: 4px;
+      transition: transform 0.2s, background 0.2s;
     }
-    #theme-toggle:hover {
-      background-color: var(--primary-dark);
-      transform: scale(1.08);
+    #theme-toggle:hover { transform: scale(1.08); }
+
+    /* ============ Hero ============ */
+    header {
+      position: relative;
+      text-align: center;
+      padding: 100px 20px 90px;
+      overflow: hidden;
+    }
+    /* 浮動光暈 */
+    .blob {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(70px);
+      opacity: 0.55;
+      z-index: 0;
+      pointer-events: none;
+    }
+    .blob-1 { width: 380px; height: 380px; background: #6366f1; top: -120px; left: -60px; animation: float1 14s ease-in-out infinite; }
+    .blob-2 { width: 320px; height: 320px; background: #06b6d4; top: -60px; right: -40px; animation: float2 16s ease-in-out infinite; }
+    .blob-3 { width: 300px; height: 300px; background: #3b82f6; bottom: -140px; left: 40%; animation: float1 18s ease-in-out infinite; }
+    [data-theme="dark"] .blob { opacity: 0.32; }
+
+    @keyframes float1 { 0%,100%{transform:translate(0,0)} 50%{transform:translate(30px,40px)} }
+    @keyframes float2 { 0%,100%{transform:translate(0,0)} 50%{transform:translate(-30px,30px)} }
+
+    .hero-inner { position: relative; z-index: 1; max-width: 720px; margin: 0 auto; }
+
+    .avatar {
+      width: 92px; height: 92px;
+      border-radius: 50%;
+      background: var(--grad);
+      color: #fff;
+      display: flex; align-items: center; justify-content: center;
+      font-family: "Space Grotesk", sans-serif;
+      font-weight: 700; font-size: 2em;
+      margin: 0 auto 22px;
+      box-shadow: 0 12px 30px -8px rgba(99,102,241,0.6);
     }
 
-    /* === RWD === */
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      padding: 6px 16px; border-radius: 999px;
+      font-size: 0.85em; font-weight: 500;
+      margin-bottom: 22px;
+      box-shadow: var(--shadow);
+    }
+    .hero-badge .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 30%, transparent); }
+
+    header h1 {
+      font-size: 3.2em;
+      line-height: 1.1;
+      color: var(--text-dark);
+      margin: 0 0 8px;
+      letter-spacing: -1px;
+    }
+    header h1 .grad {
+      background: var(--grad-text);
+      -webkit-background-clip: text; background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .hero-role {
+      font-size: 1.2em; font-weight: 600; color: var(--text-dark);
+      margin: 6px 0 14px;
+    }
+    .tagline { font-size: 1.08em; color: var(--text); max-width: 600px; margin: 0 auto 30px; }
+
+    .hero-actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+    .btn {
+      display: inline-block; padding: 12px 26px; border-radius: 999px;
+      font-weight: 600; font-size: 0.95em; cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s, opacity 0.2s;
+    }
+    .btn:hover { text-decoration: none; transform: translateY(-2px); }
+    .btn-primary { background: var(--grad); color: #fff; box-shadow: 0 12px 26px -10px rgba(99,102,241,0.7); }
+    .btn-primary:hover { box-shadow: var(--shadow-hover); }
+    .btn-outline { border: 1.5px solid var(--border); color: var(--text-dark); background: var(--surface); }
+
+    /* ============ 數據列 ============ */
+    .stats {
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      gap: 16px; max-width: 900px; margin: 0 auto;
+      padding: 0 20px;
+      position: relative; z-index: 2;
+      margin-top: -40px;
+    }
+    .stat {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 22px 16px; text-align: center;
+      box-shadow: var(--shadow);
+    }
+    .stat-num {
+      font-size: 1.9em; font-weight: 700;
+      background: var(--grad-text);
+      -webkit-background-clip: text; background-clip: text;
+      -webkit-text-fill-color: transparent;
+      line-height: 1;
+    }
+    .stat-label { font-size: 0.82em; color: var(--text-muted); margin-top: 8px; }
+    @media (max-width: 640px) { .stats { grid-template-columns: repeat(2, 1fr); } }
+
+    /* ============ 主內容 ============ */
+    main { max-width: 880px; margin: 70px auto; padding: 0 20px; }
+
+    section { margin-bottom: 64px; scroll-margin-top: 80px; }
+
+    .section-head { display: flex; align-items: center; gap: 14px; margin-bottom: 28px; }
+    .section-num {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.9em; font-weight: 500;
+      color: var(--primary);
+      background: color-mix(in srgb, var(--primary) 12%, transparent);
+      padding: 4px 10px; border-radius: 8px;
+    }
+    .section-head h2 {
+      font-size: 1.7em; color: var(--text-dark); margin: 0; letter-spacing: -0.5px;
+    }
+
+    .panel {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 32px 34px;
+      box-shadow: var(--shadow);
+    }
+    .panel p { margin: 0; }
+
+    /* ============ Timeline ============ */
+    .timeline { position: relative; padding-left: 48px; }
+    .timeline::before {
+      content: ""; position: absolute; left: 15px; top: 8px; bottom: 8px;
+      width: 3px; border-radius: 3px;
+      background: var(--grad);
+      opacity: 0.5;
+    }
+    .titem { position: relative; padding-bottom: 34px; }
+    .titem:last-child { padding-bottom: 0; }
+    .titem .icon {
+      position: absolute; left: -48px; top: 0;
+      width: 34px; height: 34px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 16px;
+      background: var(--surface);
+      border: 2px solid var(--primary);
+      box-shadow: var(--shadow);
+    }
+    .titem.edu .icon { border-color: var(--accent); }
+
+    .tdate {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.8em; color: var(--text-muted); margin-bottom: 4px;
+    }
+    .ttitle { font-size: 1.15em; font-weight: 700; color: var(--text-dark); margin: 0; }
+    .tsub { color: var(--text); font-weight: 500; margin: 2px 0 10px; }
+    .tsub .loc { color: var(--text-muted); font-weight: 400; }
+    .chip {
+      display: inline-block; font-size: 0.68em; font-weight: 600;
+      padding: 3px 10px; border-radius: 999px; margin-left: 8px;
+      vertical-align: middle; letter-spacing: 0.5px; text-transform: uppercase;
+    }
+    .chip-work { background: color-mix(in srgb, var(--primary) 15%, transparent); color: var(--primary); }
+    .chip-edu  { background: color-mix(in srgb, var(--accent) 18%, transparent); color: var(--accent); }
+    .titem ul { margin: 8px 0 0; padding-left: 18px; }
+    .titem li { margin-bottom: 6px; font-size: 0.96em; }
+
+    /* ============ Projects ============ */
+    .projects-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    @media (max-width: 680px) { .projects-grid { grid-template-columns: 1fr; } }
+
+    .card {
+      position: relative;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 26px 24px 24px;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      transition: transform 0.25s, box-shadow 0.25s;
+    }
+    .card::before {
+      content: ""; position: absolute; top: 0; left: 0; right: 0; height: 4px;
+      background: var(--grad);
+    }
+    .card:hover { transform: translateY(-6px); box-shadow: var(--shadow-hover); }
+    .card h3 { margin: 6px 0 2px; font-size: 1.12em; color: var(--text-dark); }
+    .card-date { font-family: "JetBrains Mono", monospace; font-size: 0.76em; color: var(--text-muted); }
+    .card-context { color: var(--primary); font-size: 0.85em; font-weight: 500; margin: 6px 0 12px; }
+    .card ul { margin: 0 0 14px; padding-left: 18px; }
+    .card li { margin-bottom: 6px; font-size: 0.92em; }
+    .card-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+    .mini-tag {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.72em; color: var(--text-muted);
+      background: var(--surface-2); border: 1px solid var(--border);
+      padding: 3px 9px; border-radius: 6px;
+    }
+
+    /* ============ Skills ============ */
+    .skill-group { margin-bottom: 20px; }
+    .skill-group:last-child { margin-bottom: 0; }
+    .skill-group h4 { margin: 0 0 10px; color: var(--text-dark); font-size: 1em; }
+    .tags { display: flex; flex-wrap: wrap; gap: 8px; }
+    .tag {
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 6px 14px; border-radius: 999px; font-size: 0.88em;
+      transition: transform 0.2s, border-color 0.2s, color 0.2s;
+    }
+    .tag:hover { transform: translateY(-2px); border-color: var(--primary); color: var(--primary); }
+
+    /* ============ Contact ============ */
+    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    @media (max-width: 560px) { .contact-grid { grid-template-columns: 1fr; } }
+    .contact-item {
+      display: flex; align-items: center; gap: 12px;
+      background: var(--surface-2); border: 1px solid var(--border);
+      border-radius: 12px; padding: 14px 18px;
+      transition: transform 0.2s, border-color 0.2s;
+    }
+    .contact-item:hover { transform: translateY(-2px); border-color: var(--primary); text-decoration: none; }
+    .contact-item .ci-icon { font-size: 1.4em; }
+    .contact-item .ci-label { font-size: 0.78em; color: var(--text-muted); }
+    .contact-item .ci-value { color: var(--text-dark); font-weight: 600; font-size: 0.95em; }
+
+    /* ============ 頁尾 ============ */
+    footer { text-align: center; padding: 40px 10px 50px; color: var(--text-muted); font-size: 0.88em; }
+    .social-links { display: flex; justify-content: center; gap: 14px; margin-bottom: 18px; }
+    .social-links a {
+      display: flex; align-items: center; justify-content: center;
+      width: 46px; height: 46px; border-radius: 50%;
+      background: var(--surface); border: 1px solid var(--border);
+      color: var(--text-muted);
+      box-shadow: var(--shadow);
+      transition: transform 0.2s, background 0.25s, color 0.25s, border-color 0.25s;
+    }
+    .social-links a:hover {
+      transform: translateY(-4px);
+      background: var(--grad); color: #fff; border-color: transparent;
+      box-shadow: var(--shadow-hover);
+    }
+    .social-links svg { width: 20px; height: 20px; fill: currentColor; }
+
+    /* ============ 捲動淡入 ============ */
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .reveal.in { opacity: 1; transform: none; }
+
+    @media (prefers-reduced-motion: reduce) {
+      .reveal { opacity: 1; transform: none; transition: none; }
+      .blob { animation: none; }
+      html { scroll-behavior: auto; }
+    }
+
     @media (max-width: 600px) {
-      header { padding: 70px 16px 50px; }
-      header h1 { font-size: 2em; }
-      section { padding: 28px 20px; }
-      main { margin: 40px auto; }
-      #theme-toggle { width: 40px; height: 40px; top: 15px; right: 15px; }
-      .card-head { flex-direction: column; }
+      header { padding: 70px 16px 70px; }
+      header h1 { font-size: 2.3em; }
+      .panel { padding: 26px 22px; }
+      main { margin: 50px auto; }
     }
   </style>
 </head>
 <body>
 
-  <!-- 深色模式切換按鈕 -->
-  <button id="theme-toggle" aria-label="Toggle dark mode" title="Toggle dark mode">🌙</button>
+  <!-- 導覽列 -->
+  <nav>
+    <div class="nav-brand"><span>ST</span> Huang</div>
+    <div class="nav-links">
+      <a href="#about">About</a>
+      <a href="#timeline">Journey</a>
+      <a href="#projects">Projects</a>
+      <a href="#skills">Skills</a>
+      <a href="#contact" class="nav-cta">Contact</a>
+      <button id="theme-toggle" aria-label="Toggle dark mode" title="Toggle dark mode">🌙</button>
+    </div>
+  </nav>
 
+  <!-- Hero -->
   <header>
-    <h1>👋 Hi, I’m Shih-Ting Huang</h1>
-    <p class="tagline">
-      M.S. Computer Science student at Northeastern University, with 6 years building
-      automation, data integration, and analytics solutions for supply chain operations.
-    </p>
-    <p class="location">📍 Seattle, WA</p>
-    <div class="hero-actions">
-      <a class="btn btn-primary" href="#projects">View Projects</a>
-      <a class="btn btn-outline" href="mailto:sthuangna@gmail.com">Get in Touch</a>
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+
+    <div class="hero-inner">
+      <div class="avatar">SH</div>
+      <div class="hero-badge"><span class="dot"></span> Seeking Software Engineer Internship · Summer 2027</div>
+      <h1>Hi, I’m <span class="grad">Shih-Ting Huang</span> 👋</h1>
+      <p class="hero-role">Software Engineer · Backend &amp; Automation</p>
+      <p class="tagline">
+        Automation &amp; data engineer with 6 years supporting semiconductor supply chains
+        (TSMC, Micron, UMC). Now an M.S. Computer Science student at Northeastern, building
+        reliable software end to end.
+      </p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="#projects">View Projects</a>
+        <a class="btn btn-outline" href="mailto:sthuangna@gmail.com">Get in Touch</a>
+      </div>
     </div>
   </header>
+
+  <!-- 數據亮點 -->
+  <div class="stats">
+    <div class="stat reveal"><div class="stat-num">6+</div><div class="stat-label">Years Experience</div></div>
+    <div class="stat reveal"><div class="stat-num">$6M</div><div class="stat-label">Import Volume Sustained</div></div>
+    <div class="stat reveal"><div class="stat-num">40%</div><div class="stat-label">Fewer Inventory Inquiries</div></div>
+    <div class="stat reveal"><div class="stat-num">15+</div><div class="stat-label">Data Formats Unified</div></div>
+  </div>
 
   <main>
     <!-- About -->
     <section id="about">
-      <h2>About</h2>
-      <p>
-        I turn messy, manual operations into reliable software. Over the past six years I’ve
-        built ERP integrations, process automation, and data-driven planning tools for supply
-        chain teams — and I’m now pursuing my M.S. in Computer Science at Northeastern University
-        to deepen my engineering foundations. I enjoy working across the stack: Python data
-        pipelines, REST APIs, and pragmatic tools that people actually use every day.
-      </p>
+      <div class="section-head reveal"><span class="section-num">01</span><h2>About</h2></div>
+      <div class="panel reveal">
+        <p>
+          I turn messy, manual operations into reliable software. Over the past six years I’ve
+          built ERP integrations, process automation, and data-driven planning tools for supply
+          chain teams — and I’m now pursuing my M.S. in Computer Science at Northeastern University
+          to deepen my engineering foundations. I enjoy working across the stack: Python data
+          pipelines, REST APIs, and pragmatic tools that people actually use every day.
+        </p>
+      </div>
     </section>
 
     <!-- Timeline -->
     <section id="timeline">
-      <h2>Experience &amp; Education</h2>
-      <div class="timeline">
+      <div class="section-head reveal"><span class="section-num">02</span><h2>My Journey</h2></div>
+      <div class="panel reveal">
+        <div class="timeline">
 
-        <div class="timeline-item education">
-          <div class="timeline-content">
-            <div class="timeline-date">Sep 2025 – Apr 2028</div>
-            <p class="timeline-title">
-              Northeastern University <span class="chip chip-edu">Education</span>
-            </p>
-            <p class="timeline-subtitle">
-              M.S. in Computer Science <span class="loc">· Seattle, WA, USA</span>
-            </p>
+          <div class="titem edu">
+            <div class="icon">🎓</div>
+            <div class="tdate">Sep 2025 – Apr 2028</div>
+            <p class="ttitle">Northeastern University <span class="chip chip-edu">Education</span></p>
+            <p class="tsub">M.S. in Computer Science <span class="loc">· Seattle, WA, USA</span></p>
           </div>
-        </div>
 
-        <div class="timeline-item work">
-          <div class="timeline-content">
-            <div class="timeline-date">Mar 2019 – Mar 2025</div>
-            <p class="timeline-title">
-              Supertung Industrial Co., Ltd. <span class="chip chip-work">Experience</span>
-            </p>
-            <p class="timeline-subtitle">
-              Procurement Analytics &amp; Automation Specialist <span class="loc">· Taichung, Taiwan</span>
-            </p>
+          <div class="titem work">
+            <div class="icon">💼</div>
+            <div class="tdate">Mar 2019 – Mar 2025</div>
+            <p class="ttitle">Supertung Industrial Co., Ltd. <span class="chip chip-work">Experience</span></p>
+            <p class="tsub">Procurement Analytics &amp; Automation Specialist <span class="loc">· Taichung, Taiwan</span></p>
             <ul>
-              <li>Cut monthly procurement data consolidation from 3 days to under 1 hour with an internal ERP integration tool covering 15+ vendor export formats.</li>
-              <li>Sustained $6M in COVID-era import volume via a Python capacity-planning model forecasting warehouse utilization across shipment schedules.</li>
-              <li>Ensured material availability for semiconductor fab construction customers including TSMC, UMC, PSMC, and Micron.</li>
+              <li>Cut monthly procurement data consolidation from 3 days to under 1 hour with an ERP integration tool covering 15+ vendor formats.</li>
+              <li>Sustained $6M in COVID-era import volume via a Python capacity-planning model forecasting warehouse utilization.</li>
+              <li>Ensured material availability for semiconductor fab customers including TSMC, UMC, PSMC, and Micron.</li>
             </ul>
           </div>
-        </div>
 
-        <div class="timeline-item work">
-          <div class="timeline-content">
-            <div class="timeline-date">Aug 2017 – Jan 2018</div>
-            <p class="timeline-title">
-              Brantabee Italia <span class="chip chip-work">Experience</span>
-            </p>
-            <p class="timeline-subtitle">
-              Software Engineering Intern <span class="loc">· Corciano, Italy</span>
-            </p>
+          <div class="titem work">
+            <div class="icon">💼</div>
+            <div class="tdate">Aug 2017 – Jan 2018</div>
+            <p class="ttitle">Brantabee Italia <span class="chip chip-work">Experience</span></p>
+            <p class="tsub">Software Engineering Intern <span class="loc">· Corciano, Italy</span></p>
             <ul>
-              <li>Built a Spring Boot REST service that mapped RFID scan events to inventory state transitions in PostgreSQL across 200+ smart wine dispensers.</li>
-              <li>Designed idempotent reorder APIs with database-level uniqueness constraints, cutting the duplicate-order rate from ~2% to near-zero.</li>
+              <li>Built a Spring Boot REST service mapping RFID scan events to inventory state transitions in PostgreSQL across 200+ smart wine dispensers.</li>
+              <li>Designed idempotent reorder APIs, cutting the duplicate-order rate from ~2% to near-zero.</li>
             </ul>
           </div>
-        </div>
 
-        <div class="timeline-item education">
-          <div class="timeline-content">
-            <div class="timeline-date">Sep 2013 – Jun 2017</div>
-            <p class="timeline-title">
-              Tunghai University <span class="chip chip-edu">Education</span>
-            </p>
-            <p class="timeline-subtitle">
-              B.A. in Industrial Design <span class="loc">· Taichung, Taiwan</span>
-            </p>
+          <div class="titem edu">
+            <div class="icon">🎨</div>
+            <div class="tdate">Sep 2013 – Jun 2017</div>
+            <p class="ttitle">Tunghai University <span class="chip chip-edu">Education</span></p>
+            <p class="tsub">B.A. in Industrial Design <span class="loc">· Taichung, Taiwan</span></p>
           </div>
-        </div>
 
+        </div>
       </div>
     </section>
 
     <!-- Projects -->
     <section id="projects">
-      <h2>Projects</h2>
+      <div class="section-head reveal"><span class="section-num">03</span><h2>Projects</h2></div>
       <div class="projects-grid">
 
-        <article class="card">
-          <div class="card-head">
-            <h3>FlexLab Event Board</h3>
-            <span class="card-date">Feb 2026 – Jun 2026</span>
-          </div>
+        <article class="card reveal">
+          <span class="card-date">Feb 2026 – Jun 2026</span>
+          <h3>FlexLab Event Board</h3>
           <p class="card-context">Deployed at Northeastern University FlexLab</p>
           <ul>
-            <li>Built and deployed a touchscreen event kiosk rendering workshop and training cards from Supabase via REST API, with images served from Supabase Storage.</li>
-            <li>Implemented in-app event registration and a keyword-matched FAQ chatbot with a staff-on-duty lookup synced from SharePoint Excel through Azure Logic Apps.</li>
+            <li>Touchscreen event kiosk rendering workshop cards from Supabase via REST API, with images from Supabase Storage.</li>
+            <li>In-app registration + keyword-matched FAQ chatbot with a staff lookup synced from SharePoint via Azure Logic Apps.</li>
           </ul>
+          <div class="card-tags">
+            <span class="mini-tag">Supabase</span>
+            <span class="mini-tag">REST API</span>
+            <span class="mini-tag">Azure Logic Apps</span>
+          </div>
         </article>
 
-        <article class="card">
-          <div class="card-head">
-            <h3>Topic Voting Platform</h3>
-            <span class="card-date">Jan 2026 – Apr 2026</span>
-          </div>
-          <p class="card-context">Team Project · Java</p>
+        <article class="card reveal">
+          <span class="card-date">Jan 2026 – Apr 2026</span>
+          <h3>Topic Voting Platform</h3>
+          <p class="card-context">Team Project</p>
           <ul>
-            <li>Enforced separation of concerns across 6 views by routing every business-logic call through a single AppController.</li>
-            <li>Designed a configurable data layer letting the same codebase run offline (local CSV) or against a live Spring Boot REST API without modification.</li>
+            <li>Enforced separation of concerns across 6 views by routing all business logic through a single AppController.</li>
+            <li>Configurable data layer letting the same code run offline (CSV) or against a live Spring Boot REST API.</li>
           </ul>
+          <div class="card-tags">
+            <span class="mini-tag">Java</span>
+            <span class="mini-tag">Spring Boot</span>
+            <span class="mini-tag">MVC</span>
+          </div>
         </article>
 
-        <article class="card">
-          <div class="card-head">
-            <h3>ERP Data Integration Tool</h3>
-            <span class="card-date">Mar 2023 – Dec 2023</span>
-          </div>
-          <p class="card-context">Collaborative Project · deployed internally · Python</p>
+        <article class="card reveal">
+          <span class="card-date">Mar 2023 – Dec 2023</span>
+          <h3>ERP Data Integration Tool</h3>
+          <p class="card-context">Collaborative Project · deployed internally</p>
           <ul>
-            <li>Built a Python app (Tkinter, pandas) that auto-detects header rows across inconsistent Excel layouts and maps raw columns to 15 canonical fields via regex.</li>
-            <li>Layered the pipeline into ingestion, transformation, and validation so new ERP formats onboard by adding regex patterns only — no logic changes.</li>
+            <li>Python app auto-detecting header rows across inconsistent Excel layouts, mapping raw columns to 15 canonical fields via regex.</li>
+            <li>Layered ingestion / transformation / validation so new ERP formats onboard by adding regex only.</li>
           </ul>
+          <div class="card-tags">
+            <span class="mini-tag">Python</span>
+            <span class="mini-tag">pandas</span>
+            <span class="mini-tag">Tkinter</span>
+          </div>
         </article>
 
       </div>
@@ -514,85 +570,86 @@
 
     <!-- Skills -->
     <section id="skills">
-      <h2>Technical Skills</h2>
-
-      <div class="skill-group">
-        <h4>Languages</h4>
-        <div class="tags">
-          <span class="tag">Python</span>
-          <span class="tag">SQL</span>
-          <span class="tag">Java</span>
+      <div class="section-head reveal"><span class="section-num">04</span><h2>Technical Skills</h2></div>
+      <div class="panel reveal">
+        <div class="skill-group">
+          <h4>Languages</h4>
+          <div class="tags"><span class="tag">Python</span><span class="tag">SQL</span><span class="tag">Java</span></div>
         </div>
-      </div>
-
-      <div class="skill-group">
-        <h4>Data &amp; Analytics</h4>
-        <div class="tags">
-          <span class="tag">pandas</span>
-          <span class="tag">PostgreSQL</span>
-          <span class="tag">ETL pipelines</span>
-          <span class="tag">Data modeling</span>
-          <span class="tag">Process automation</span>
-          <span class="tag">REST APIs</span>
+        <div class="skill-group">
+          <h4>Data &amp; Analytics</h4>
+          <div class="tags">
+            <span class="tag">pandas</span><span class="tag">PostgreSQL</span><span class="tag">ETL pipelines</span>
+            <span class="tag">Data modeling</span><span class="tag">Process automation</span><span class="tag">REST APIs</span>
+          </div>
         </div>
-      </div>
-
-      <div class="skill-group">
-        <h4>Cloud &amp; Tools</h4>
-        <div class="tags">
-          <span class="tag">AWS Certified AI Practitioner</span>
-          <span class="tag">Azure</span>
-          <span class="tag">Git</span>
-          <span class="tag">Google Apps Script</span>
-          <span class="tag">Tkinter</span>
+        <div class="skill-group">
+          <h4>Cloud &amp; Tools</h4>
+          <div class="tags">
+            <span class="tag">AWS Certified AI Practitioner</span><span class="tag">Azure</span><span class="tag">Git</span>
+            <span class="tag">Google Apps Script</span><span class="tag">Tkinter</span>
+          </div>
         </div>
-      </div>
-
-      <div class="skill-group">
-        <h4>Industry Knowledge</h4>
-        <div class="tags">
-          <span class="tag">Fab utility systems (CDS, UPW, wastewater)</span>
-          <span class="tag">Demand forecasting</span>
-          <span class="tag">Supply chain analytics</span>
+        <div class="skill-group">
+          <h4>Industry Knowledge</h4>
+          <div class="tags">
+            <span class="tag">Fab utility systems (CDS, UPW, wastewater)</span>
+            <span class="tag">Demand forecasting</span><span class="tag">Supply chain analytics</span>
+          </div>
         </div>
       </div>
     </section>
 
     <!-- Contact -->
     <section id="contact">
-      <h2>Contact</h2>
-      <ul class="contact-list">
-        <li>📧 Email: <a href="mailto:sthuangna@gmail.com">sthuangna@gmail.com</a></li>
-        <li>💼 LinkedIn: <a href="https://www.linkedin.com/in/hstna/" target="_blank" rel="noopener noreferrer">linkedin.com/in/hstna</a></li>
-        <li>🐙 GitHub: <a href="https://github.com/hstna" target="_blank" rel="noopener noreferrer">github.com/hstna</a></li>
-        <li>📍 Location: Seattle, WA</li>
-      </ul>
+      <div class="section-head reveal"><span class="section-num">05</span><h2>Get in Touch</h2></div>
+      <div class="contact-grid">
+        <a class="contact-item reveal" href="mailto:sthuangna@gmail.com">
+          <span class="ci-icon">📧</span>
+          <span><span class="ci-label">Email</span><br><span class="ci-value">sthuangna@gmail.com</span></span>
+        </a>
+        <a class="contact-item reveal" href="https://www.linkedin.com/in/hstna/" target="_blank" rel="noopener noreferrer">
+          <span class="ci-icon">💼</span>
+          <span><span class="ci-label">LinkedIn</span><br><span class="ci-value">linkedin.com/in/hstna</span></span>
+        </a>
+        <a class="contact-item reveal" href="https://github.com/hstna" target="_blank" rel="noopener noreferrer">
+          <span class="ci-icon">🐙</span>
+          <span><span class="ci-label">GitHub</span><br><span class="ci-value">github.com/hstna</span></span>
+        </a>
+        <div class="contact-item reveal">
+          <span class="ci-icon">📍</span>
+          <span><span class="ci-label">Location</span><br><span class="ci-value">Seattle, WA</span></span>
+        </div>
+      </div>
     </section>
   </main>
 
   <footer>
     <div class="social-links">
-      <a href="https://www.linkedin.com/in/hstna/" target="_blank" title="LinkedIn" aria-label="LinkedIn" rel="noopener noreferrer">💼</a>
-      <a href="https://github.com/hstna" target="_blank" title="GitHub" aria-label="GitHub" rel="noopener noreferrer">🐙</a>
+      <a href="mailto:sthuangna@gmail.com" title="Email" aria-label="Email">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 4h20a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1zm10 8.5L3.5 6.7V18h17V6.7L12 12.5zM4.4 5l7.6 5.2L19.6 5H4.4z"/></svg>
+      </a>
+      <a href="https://www.linkedin.com/in/hstna/" target="_blank" title="LinkedIn" aria-label="LinkedIn" rel="noopener noreferrer">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.98 3.5A2.5 2.5 0 1 1 0 3.51 2.5 2.5 0 0 1 4.98 3.5zM.25 8.25h4.5V24h-4.5V8.25zM8.25 8.25h4.31v2.15h.06c.6-1.14 2.07-2.34 4.26-2.34 4.56 0 5.4 3 5.4 6.9V24h-4.5v-6.99c0-1.67-.03-3.82-2.33-3.82-2.33 0-2.69 1.82-2.69 3.7V24h-4.5V8.25z"/></svg>
+      </a>
+      <a href="https://github.com/hstna" target="_blank" title="GitHub" aria-label="GitHub" rel="noopener noreferrer">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .5C5.37.5 0 5.87 0 12.5c0 5.3 3.44 9.8 8.21 11.39.6.11.82-.26.82-.58v-2.03c-3.34.73-4.04-1.61-4.04-1.61-.55-1.39-1.34-1.76-1.34-1.76-1.09-.75.08-.73.08-.73 1.21.09 1.84 1.24 1.84 1.24 1.07 1.83 2.81 1.3 3.5.99.11-.78.42-1.3.76-1.6-2.67-.3-5.47-1.34-5.47-5.95 0-1.31.47-2.39 1.24-3.23-.12-.3-.54-1.52.12-3.18 0 0 1.01-.32 3.3 1.23a11.5 11.5 0 0 1 6 0c2.29-1.55 3.3-1.23 3.3-1.23.66 1.66.24 2.88.12 3.18.77.84 1.24 1.92 1.24 3.23 0 4.62-2.81 5.64-5.49 5.94.43.37.81 1.1.81 2.22v3.29c0 .32.22.7.83.58A12 12 0 0 0 24 12.5C24 5.87 18.63.5 12 .5z"/></svg>
+      </a>
     </div>
     <p>© <span id="year">2026</span> Shih-Ting Huang · Built with ❤️ using GitHub Pages.</p>
   </footer>
 
-  <!-- === 腳本 === -->
   <script>
-    // 自動年份
     document.getElementById('year').textContent = new Date().getFullYear();
 
-    // 深色模式切換
+    // 深色模式
     const toggleBtn = document.getElementById('theme-toggle');
-    const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
-    const currentTheme = localStorage.getItem('theme');
-
-    if (currentTheme === 'dark' || (!currentTheme && prefersDarkScheme.matches)) {
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+    const saved = localStorage.getItem('theme');
+    if (saved === 'dark' || (!saved && prefersDark.matches)) {
       document.documentElement.setAttribute('data-theme', 'dark');
       toggleBtn.textContent = '☀️';
     }
-
     toggleBtn.addEventListener('click', () => {
       const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
       if (isDark) {
@@ -604,6 +661,21 @@
         localStorage.setItem('theme', 'dark');
         toggleBtn.textContent = '☀️';
       }
+    });
+
+    // 捲動淡入
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((e, i) => {
+        if (e.isIntersecting) {
+          e.target.style.transitionDelay = (e.target.dataset.delay || '0ms');
+          e.target.classList.add('in');
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.reveal').forEach((el, i) => {
+      el.dataset.delay = (i % 4) * 80 + 'ms';
+      io.observe(el);
     });
   </script>
 
