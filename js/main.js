@@ -201,35 +201,63 @@ if (!reduceMotion) {
   document.querySelectorAll('.reveal').forEach((el) => revealObserver.observe(el));
 }
 
-/* ---------- count-up ---------- */
-const countObserver = new IntersectionObserver(
-  (entries) => {
-    entries.forEach((e) => {
-      if (!e.isIntersecting) return;
-      countObserver.unobserve(e.target);
-      const final = e.target.dataset.count;
-      const m = final.match(/^(\D*)(\d+)(.*)$/s);
-      if (reduceMotion || !m) {
-        e.target.textContent = final;
-        return;
+/* ---------- count-up（捲動位置驅動） ---------- */
+/* 用計時器的話，數字一進入視窗底部就開始跑固定秒數，等使用者真的捲到
+   這一段時動畫早就結束了。改成由捲動位置決定數值：元素從視窗底部往上
+   移動到約半屏高度的過程，數字從 0 走到終值——捲到定位時剛好到達。 */
+const counters = [...document.querySelectorAll('[data-count]')].map((el) => {
+  const final = el.dataset.count;
+  const m = final.match(/^(\D*)(\d+)(.*)$/s);
+  return m
+    ? { el, pre: m[1], target: Number(m[2]), post: m[3], final }
+    : { el, final };
+});
+
+if (counters.length) {
+  if (reduceMotion) {
+    counters.forEach((c) => { c.el.textContent = c.final; });
+  } else {
+    /* 曲線要夠平緩。cubic ease-out 在行程 68% 時就已經四捨五入到終值，
+       數字會在使用者抵達之前就停住。1.5 次方大約在 90% 才收斂。 */
+    const easeOut = (t) => 1 - Math.pow(1 - t, 1.5);
+
+    function paint() {
+      for (const c of counters) {
+        if (c.target === undefined) { c.el.textContent = c.final; continue; }
+        const top = c.el.getBoundingClientRect().top;
+        /* 進場：元素頂端位於視窗底部 → 結束：升到視窗上方約五分之一處，
+           也就是使用者確實「抵達」這一段、標題已經讀得到的位置。 */
+        const from = innerHeight;
+        const to = innerHeight * 0.22;
+        const p = Math.min(Math.max((from - top) / (from - to), 0), 1);
+        c.el.textContent = c.pre + Math.round(c.target * easeOut(p)) + c.post;
       }
-      const [, pre, digits, post] = m;
-      const target = Number(digits);
-      const start = performance.now();
-      const dur = 800;
-      const tick = (now) => {
-        const t = Math.min((now - start) / dur, 1);
-        const eased = 1 - Math.pow(1 - t, 3);
-        e.target.textContent = pre + Math.round(target * eased) + post;
-        if (t < 1) requestAnimationFrame(tick);
-      };
-      e.target.textContent = pre + '0' + post;
-      requestAnimationFrame(tick);
-    });
-  },
-  { threshold: 0.6 }
-);
-document.querySelectorAll('[data-count]').forEach((el) => countObserver.observe(el));
+    }
+
+    /* 只在數字接近視窗時才掛捲動監聽，離開就卸掉 */
+    let ticking = false;
+    const onScroll = () => {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => { paint(); ticking = false; });
+    };
+
+    let listening = false;
+    const setListening = (on) => {
+      if (on === listening) return;
+      listening = on;
+      if (on) addEventListener('scroll', onScroll, { passive: true });
+      else removeEventListener('scroll', onScroll);
+    };
+
+    const countObserver = new IntersectionObserver(
+      (entries) => setListening(entries.some((e) => e.isIntersecting)),
+      { rootMargin: '100% 0px 100% 0px' }
+    );
+    counters.forEach((c) => countObserver.observe(c.el));
+    paint(); /* 若載入時已捲在該位置（例如帶 #chaos），先算一次 */
+  }
+}
 
 /* ---------- Hero：靜態 SVG 網格（WebGL 的替代圖與佔位） ---------- */
 /* COLS/ROWS 刻意與 hero-gl.js 重複定義，讓 main.js 在 hero-gl.js
