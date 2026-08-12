@@ -260,27 +260,47 @@ if (counters.length) {
 }
 
 /* ---------- Hero：靜態 SVG 網格（WebGL 的替代圖與佔位） ---------- */
-/* COLS/ROWS 刻意與 hero-gl.js 重複定義，讓 main.js 在 hero-gl.js
-   不被載入時仍能獨立運作。兩處必須維持相同數值。 */
-const COLS = 24;
-const ROWS = 12;
+/* 依容器的實際像素產生，viewBox 與容器 1:1，所以點的大小和間距在任何
+   螢幕比例下都一致。用固定 viewBox + preserveAspectRatio="slice" 的話，
+   窄長的手機畫面會把整張圖放大兩倍多，點變得又大又疏。 */
 const heroSvg = document.getElementById('hero-fallback');
-{
+const GRID_SPACING = 26; /* CSS px */
+const GRID_RADIUS = 1.5;
+
+function drawFallbackGrid() {
+  const box = heroSvg.getBoundingClientRect();
+  const w = Math.max(1, Math.round(box.width));
+  const h = Math.max(1, Math.round(box.height));
+  const cols = Math.max(2, Math.round(w / GRID_SPACING));
+  const rows = Math.max(2, Math.round(h / GRID_SPACING));
+  const gapX = w / cols;
+  const gapY = h / rows;
+
   const dots = [];
-  for (let r = 0; r < ROWS; r++) {
-    for (let c = 0; c < COLS; c++) {
-      dots.push(`<circle cx="${25 + c * 22}" cy="${25 + r * 22}" r="1.6"/>`);
+  for (let r = 0; r < rows; r++) {
+    for (let c = 0; c < cols; c++) {
+      const x = (c + 0.5) * gapX;
+      const y = (r + 0.5) * gapY;
+      dots.push(`<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="${GRID_RADIUS}"/>`);
     }
   }
+  heroSvg.setAttribute('viewBox', `0 0 ${w} ${h}`);
+  heroSvg.setAttribute('preserveAspectRatio', 'none');
   heroSvg.innerHTML = `<g fill="currentColor" opacity="0.55">${dots.join('')}</g>`;
 }
+
+drawFallbackGrid();
+addEventListener('resize', drawFallbackGrid);
 
 /* ---------- WebGL 能耗閘門 ---------- */
 async function webglBlockedBy() {
   if (reduceMotion) return 'reduced-motion';
   if (navigator.connection?.saveData) return 'save-data';
-  if (navigator.deviceMemory && navigator.deviceMemory <= 4) return 'low-memory';
-  if (navigator.hardwareConcurrency && navigator.hardwareConcurrency <= 4) return 'low-cpu';
+  /* deviceMemory 出於隱私考量會量化並以 8 為上限，大量手機回報 4，
+     那是分桶的結果而非能力指標，不能拿來當弱裝置門檻。
+     hardwareConcurrency 只擋真正的低階裝置——這個場景是 288 個點、
+     單一 draw call、鎖 30fps，負擔比一個 CSS 過場還低。 */
+  if (navigator.hardwareConcurrency && navigator.hardwareConcurrency <= 2) return 'low-cpu';
 
   const probe = document.createElement('canvas');
   if (!probe.getContext('webgl') && !probe.getContext('experimental-webgl')) return 'no-webgl';
