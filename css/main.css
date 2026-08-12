@@ -1,0 +1,479 @@
+/* ============ Font ============ */
+@font-face {
+  font-family: "Mono";
+  src: url("../fonts/mono.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ============ Tokens ============ */
+:root {
+  color-scheme: light dark;
+
+  --bg: #fbfbfa;
+  --text: #16161a;
+  --muted: #5c5c66;
+  --rule: #e4e4e0;
+  /* Persimmon — 2026 的強調色趨勢之一。紙白上 5.00:1，白字於其上 5.18:1，皆過 AA。 */
+  --accent: #C2410C;
+  --on-accent: #ffffff;
+
+  --font-sans: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-mono: "Mono", ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas, monospace;
+
+  --measure: 68ch;
+  --gutter: clamp(20px, 5vw, 48px);
+  --step: clamp(64px, 10vw, 128px);
+  /* 版面容器：不置中的話，寬螢幕上右半邊會整片空白 */
+  --page: 1180px;
+  --rail: 190px;
+  --edge: max(var(--gutter), calc((100% - var(--page)) / 2));
+}
+
+[data-theme="dark"] {
+  color-scheme: dark;
+  --bg: #0d0d0e;
+  --text: #ececea;
+  --muted: #9a9aa4;
+  --rule: #26262b;
+  --accent: #4ade80;
+  --on-accent: #08120c;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-sans);
+  font-size: 17px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* 全站唯一的焦點樣式 */
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+@media (forced-colors: active) {
+  :focus-visible { outline: 2px solid CanvasText; }
+}
+
+/* ============ Skip link ============ */
+.skip {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  background: var(--accent);
+  color: var(--on-accent);
+  padding: 10px 16px;
+  z-index: 100;
+}
+.skip:focus { left: 8px; top: 8px; }
+
+/* ============ 排版基礎 ============ */
+h1, h2, h3 { font-weight: 600; letter-spacing: -0.02em; line-height: 1.15; margin: 0; }
+h1 { font-size: clamp(2.1rem, 6vw, 3.6rem); }
+h2 { font-size: clamp(1.6rem, 4vw, 2.4rem); }
+h3 { font-size: 1.05rem; letter-spacing: -0.01em; }
+p { margin: 0; }
+em { font-style: normal; color: var(--accent); }
+
+.mono { font-family: var(--font-mono); font-weight: 500; font-size: 0.8em; letter-spacing: 0.02em; }
+.muted { color: var(--muted); }
+
+a { color: inherit; text-decoration: none; }
+
+/* 微互動 2：底線由左畫出 */
+main a[href], .foot a[href] {
+  background-image: linear-gradient(var(--accent), var(--accent));
+  background-repeat: no-repeat;
+  background-position: 0 100%;
+  background-size: 100% 1px;
+  padding-bottom: 1px;
+}
+@media (prefers-reduced-motion: no-preference) {
+  main a[href], .foot a[href] {
+    background-size: 0% 1px;
+    transition: background-size 0.28s ease;
+  }
+  main a[href]:hover, main a[href]:focus-visible,
+  .foot a[href]:hover, .foot a[href]:focus-visible { background-size: 100% 1px; }
+}
+
+/* ============ 導覽 ============ */
+.nav {
+  position: sticky; top: 0; z-index: 50;
+  display: flex; align-items: center; gap: 24px;
+  padding: 14px var(--edge);
+  background: var(--bg);
+  border-bottom: 1px solid var(--rule);
+}
+.nav-brand { font-weight: 600; letter-spacing: -0.01em; margin-right: auto; }
+.nav-list { display: flex; gap: 20px; list-style: none; margin: 0; padding: 0; }
+.nav-list a {
+  font-size: 0.9rem; color: var(--muted);
+  padding-bottom: 2px; border-bottom: 1px solid transparent;
+}
+.nav-list a:hover { color: var(--text); }
+.nav-list a.is-current { color: var(--text); border-bottom-color: var(--accent); }
+
+#theme-toggle {
+  display: grid; place-items: center;
+  width: 34px; height: 34px; padding: 0;
+  background: none; border: 1px solid var(--rule); color: var(--muted);
+  border-radius: 999px; cursor: pointer;
+}
+#theme-toggle:hover { color: var(--text); border-color: var(--muted); }
+.tt-icon { width: 16px; height: 16px; fill: currentColor; display: block; }
+/* 顯示「按下去會切到的模式」：淺色時是月亮，深色時是太陽 */
+.tt-sun { display: none; }
+[data-theme="dark"] .tt-moon { display: none; }
+[data-theme="dark"] .tt-sun { display: block; }
+
+/* 手機：導覽移到底部，不隱藏 */
+@media (max-width: 640px) {
+  .nav {
+    position: fixed; bottom: 0; top: auto; width: 100%;
+    border-bottom: none; border-top: 1px solid var(--rule);
+    padding: 10px 16px; gap: 12px;
+  }
+  .nav-brand { display: none; }
+  .nav-list { flex: 1; justify-content: space-around; gap: 0; }
+  .nav-list a { font-size: 0.82rem; }
+  #theme-toggle { flex: none; }
+  body { padding-bottom: 62px; }
+}
+
+/* ============ 幕 0 — Hero ============ */
+.hero {
+  position: relative;
+  min-height: 88vh;
+  display: flex; align-items: center;
+  padding: var(--step) var(--edge);
+  overflow: hidden;
+}
+.hero-visual {
+  position: absolute; inset: 0;
+  pointer-events: none;
+  /* 淺色模式的深綠在紙白上本來就低對比，需要比深色模式更高的不透明度 */
+  opacity: 0.8;
+  color: var(--accent);
+}
+/* 兩者疊放而非並排：canvas 取消隱藏時不得改變任何流程配置，
+   否則會產生 CLS（實測曾達 0.546）。 */
+.hero-visual svg, .hero-visual canvas {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%; display: block;
+}
+[data-theme="dark"] .hero-visual { opacity: 0.62; }
+
+.hero-copy { position: relative; width: 100%; }
+.eyebrow { color: var(--muted); font-size: 0.85rem; margin-bottom: 24px; }
+.lede { color: var(--muted); max-width: 46ch; margin: 24px 0 34px; }
+
+.hero-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+.hero-aside { margin-top: 18px; }
+.hero-aside a { color: var(--muted); }
+.hero-aside a:hover, .hero-aside a:focus-visible { color: var(--accent); }
+.btn {
+  display: inline-block;
+  padding: 11px 22px;
+  background: var(--accent); color: var(--on-accent);
+  font-size: 0.92rem; font-weight: 500;
+  background-image: none;
+}
+.btn-quiet {
+  background: none; color: var(--text);
+  border: 1px solid var(--rule);
+}
+.btn-quiet:hover { border-color: var(--accent); color: var(--accent); }
+
+/* ============ 幕 ============ */
+main { padding: 0 var(--edge); }
+/* .act 填滿整個容器寬度，分隔線才會橫跨版面而不是只畫到一半 */
+.act {
+  padding: var(--step) 0;
+  border-top: 1px solid var(--rule);
+  scroll-margin-top: 80px;
+}
+.act-num { color: var(--muted); display: block; margin-bottom: 28px; }
+.act-title { margin-bottom: 40px; }
+.act-body { color: var(--muted); max-width: 56ch; margin-top: 28px; }
+
+/* 寬螢幕：段落編號與 hero 的 eyebrow 移到左側欄，正文靠右欄。
+   否則 68ch 的文字欄會讓右半個畫面整片空白。 */
+@media (min-width: 960px) {
+  .act, .hero-copy {
+    display: grid;
+    grid-template-columns: var(--rail) minmax(0, 1fr);
+    column-gap: 44px;
+  }
+  .act > *, .hero-copy > * { grid-column: 2; }
+  .act-num, .eyebrow {
+    grid-column: 1; grid-row: 1;
+    margin-bottom: 0;
+    padding-top: 0.55em;
+  }
+  /* 輪播帶要橫跨兩欄，否則 50% 算的是右欄寬度，滿版會整個偏掉 */
+  .strip { grid-column: 1 / -1; }
+}
+
+.statement { font-size: clamp(1.9rem, 5.5vw, 3rem); line-height: 1.25; }
+.statement .stat {
+  font-size: 1em;
+  color: var(--accent);
+  font-variant-numeric: tabular-nums;
+}
+
+/* ============ 專案 ============ */
+.proj { padding: 36px 0; border-top: 1px solid var(--rule); }
+.proj:first-of-type { border-top: none; padding-top: 0; }
+.proj-head { margin-bottom: 20px; }
+.proj-meta { color: var(--muted); margin-top: 4px; }
+.proj-body { color: var(--muted); max-width: 56ch; margin: 18px 0; }
+
+/* before → after 轉場 */
+.shift {
+  display: flex; align-items: baseline; flex-wrap: wrap; gap: 10px;
+  font-size: 1.1rem;
+}
+.shift-from { color: var(--muted); text-decoration: line-through; text-decoration-thickness: 1px; }
+.shift-arrow { color: var(--muted); font-size: 1em; }
+.shift-to { color: var(--accent); font-size: 1em; font-weight: 500; }
+.shift-what { color: var(--muted); font-size: 0.85rem; width: 100%; }
+
+/* 專案欄位：標籤與內容兩欄，四個專案格式一致，方便橫向比較。
+   沿用「Now」區塊 .skill-row 的排版語言。 */
+.proj-facts { margin: 22px 0; }
+.proj-facts dt {
+  color: var(--muted);
+  grid-column: 1;
+}
+.proj-facts dd {
+  color: var(--muted);
+  margin: 0;
+  max-width: 60ch;
+  grid-column: 2;
+}
+.proj-facts dd + dt { margin-top: 14px; }
+@media (min-width: 620px) {
+  .proj-facts {
+    display: grid;
+    grid-template-columns: 92px minmax(0, 1fr);
+    column-gap: 20px;
+    row-gap: 14px;
+    align-items: baseline;
+  }
+  .proj-facts dd + dt { margin-top: 0; }
+}
+@media (max-width: 619px) {
+  .proj-facts dt { margin-bottom: 3px; }
+}
+
+.proj-facts code {
+  font-family: var(--font-mono);
+  font-size: 0.88em;
+  color: var(--text);
+}
+
+.tags { display: flex; flex-wrap: wrap; gap: 8px; }
+.tags span { color: var(--muted); border: 1px solid var(--rule); padding: 3px 10px; }
+
+.proj-links { display: flex; flex-wrap: wrap; gap: 22px; margin-top: 14px; }
+.proj-links a { color: var(--accent); }
+
+/* ============ 路徑 ============ */
+.path-list { list-style: none; margin: 0; padding: 0 0 0 28px; position: relative; }
+.path-list::before {
+  content: ""; position: absolute; left: 0; top: 6px; bottom: 6px;
+  width: 1px; background: var(--rule);
+}
+.path-item { position: relative; padding-bottom: 40px; }
+.path-item:last-child { padding-bottom: 0; }
+.path-item::before {
+  content: ""; position: absolute; left: -32px; top: 9px;
+  width: 7px; height: 7px; border-radius: 50%;
+  background: var(--bg); border: 1px solid var(--muted);
+}
+.path-date { color: var(--muted); margin-bottom: 6px; }
+.path-sub { color: var(--muted); font-size: 0.95rem; margin-top: 3px; }
+.path-body { color: var(--muted); font-size: 0.95rem; max-width: 54ch; margin-top: 12px; }
+
+/* 微互動 4：時間線隨捲動繪出，零 JS */
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+    .path-list::before {
+      background: var(--accent);
+      transform-origin: top;
+      animation: draw-line linear both;
+      animation-timeline: view();
+      animation-range: cover 8% cover 62%;
+    }
+    @keyframes draw-line { from { scale: 1 0; } to { scale: 1 1; } }
+  }
+}
+
+/* ============ 幕 4 — 鏡頭之外 ============ */
+.about {
+  display: grid;
+  grid-template-columns: 220px minmax(0, 1fr);
+  gap: 32px;
+  align-items: start;
+  margin-bottom: 48px;
+}
+/* 統一比例並裁切：原圖是直式、橫式或方形都不影響版面，
+   宣告尺寸永遠與實際渲染一致，不會產生 CLS。 */
+.portrait img {
+  width: 100%; height: auto; display: block;
+  aspect-ratio: 4 / 5; object-fit: cover;
+  filter: grayscale(1);
+  transition: filter 0.4s ease;
+}
+.portrait:hover img { filter: grayscale(0); }
+.about-body p { color: var(--muted); max-width: 56ch; }
+.about-body p + p { margin-top: 16px; }
+
+
+@media (max-width: 620px) {
+  .about { grid-template-columns: 1fr; gap: 24px; }
+  .portrait { max-width: 200px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .portrait img { transition: none; }
+}
+
+
+/* ============ 攝影輪播帶 ============ */
+/* 滿版：50% 是容器一半，50vw 是視窗一半。--sbw 由 JS 填入捲軸寬度，
+   不扣掉的話會多出一條水平捲軸；用 overflow:hidden 遮會破壞 sticky 導覽。 */
+.strip {
+  margin-inline: calc(50% - 50vw + var(--sbw, 0px) / 2);
+  margin-top: 4px;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scrollbar-width: none;
+  cursor: grab;
+  -webkit-user-select: none;
+  user-select: none;
+}
+.strip::-webkit-scrollbar { display: none; }
+.strip.is-dragging { cursor: grabbing; }
+.strip:focus-visible { outline: 2px solid var(--accent); outline-offset: -3px; }
+
+.strip-track {
+  display: flex; gap: 10px;
+  list-style: none; margin: 0; padding: 0;
+  width: max-content;
+}
+.strip img {
+  height: clamp(170px, 26vh, 280px);
+  width: auto; display: block;
+  filter: grayscale(1);
+  -webkit-user-drag: none;
+  transition: filter 0.45s ease;
+}
+.strip:hover img { filter: grayscale(0.3); }
+@media (prefers-reduced-motion: reduce) { .strip img { transition: none; } }
+
+/* ============ Skills + Contact ============ */
+.skills { margin-bottom: 56px; }
+.skill-row {
+  display: grid; grid-template-columns: 150px 1fr; gap: 20px;
+  padding: 16px 0; border-top: 1px solid var(--rule);
+}
+.skill-row h3 { color: var(--muted); font-weight: 500; }
+.skill-row p { max-width: 60ch; }
+@media (max-width: 560px) {
+  .skill-row { grid-template-columns: 1fr; gap: 6px; }
+}
+
+.contact { border-top: 1px solid var(--rule); padding-top: 28px; }
+.contact-line {
+  display: flex; align-items: center; gap: 14px;
+  padding: 10px 0; font-style: normal;
+}
+/* 圖示為純裝飾（aria-hidden）；語意由相鄰的 .vh 文字標籤承擔 */
+.ci {
+  width: 17px; height: 17px; flex: none;
+  fill: currentColor; color: var(--muted);
+  transition: color 0.2s ease;
+}
+.contact-line:hover .ci { color: var(--accent); }
+@media (prefers-reduced-motion: reduce) { .ci { transition: none; } }
+
+/* 視覺隱藏但螢幕閱讀器可讀 */
+.vh {
+  position: absolute; width: 1px; height: 1px;
+  padding: 0; margin: -1px; overflow: hidden;
+  clip-path: inset(50%); white-space: nowrap; border: 0;
+}
+
+#copy-email {
+  font: inherit; font-size: 0.78rem;
+  background: none; border: 1px solid var(--rule); color: var(--muted);
+  padding: 2px 10px; cursor: pointer;
+}
+#copy-email:hover { color: var(--accent); border-color: var(--accent); }
+#copy-email[data-copied="true"] { color: var(--accent); border-color: var(--accent); }
+
+/* ============ 頁尾 ============ */
+.foot {
+  position: relative;
+  padding: var(--step) var(--edge) calc(var(--step) / 2);
+  color: var(--muted);
+}
+/* 分隔線必須收在容器寬度內才會與 .act 的分隔線對齊。
+   直接用 border-top 會滿版，橫跨整個視窗。 */
+.foot::before {
+  content: "";
+  position: absolute; top: 0;
+  left: var(--edge); right: var(--edge);
+  height: 1px; background: var(--rule);
+}
+.foot-note { font-size: 0.85rem; max-width: 52ch; margin-top: 12px; }
+
+/* 與各幕相同的左側欄：版權放側欄，說明文字對齊正文欄 */
+@media (min-width: 960px) {
+  .foot {
+    display: grid;
+    grid-template-columns: var(--rail) minmax(0, 1fr);
+    column-gap: 44px;
+  }
+  .foot > * { grid-column: 2; }
+  .foot > .mono {
+    grid-column: 1; grid-row: 1;
+    padding-top: 0.15em;
+  }
+  /* 單欄且填滿欄寬。行長偏長，用較鬆的行距補償行間追蹤。 */
+  .foot-note {
+    margin-top: 0;
+    max-width: none;
+    line-height: 1.8;
+  }
+}
+
+/* ============ 捲入 ============ */
+@media (prefers-reduced-motion: no-preference) {
+  .reveal { opacity: 0; transform: translateY(14px); }
+  .reveal.in {
+    opacity: 1; transform: none;
+    transition: opacity 0.5s ease, transform 0.5s ease;
+  }
+}
+
+/* ============ 錨點捲動 ============ */
+@media (prefers-reduced-motion: no-preference) {
+  html { scroll-behavior: smooth; }
+}
+
+/* ============ 高對比模式 ============ */
+@media (forced-colors: active) {
+  .hero-visual { display: none; }
+  .btn { border: 1px solid ButtonText; }
+}

@@ -2,682 +2,571 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Shih-Ting Huang | Portfolio</title>
-  <meta name="description" content="Shih-Ting Huang — M.S. Computer Science student at Northeastern University with 6 years building automation, data integration, and analytics solutions for supply chain operations." />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="color-scheme" content="light dark" />
+  <title>Shih-Ting Huang | Software Engineer</title>
+  <meta name="description" content="Shih-Ting Huang — M.S. Computer Science student at Northeastern University with 6 years turning manual supply-chain operations into reliable software." />
   <meta name="author" content="Shih-Ting Huang" />
 
-  <!-- Open Graph -->
-  <meta property="og:title" content="Shih-Ting Huang | Portfolio" />
-  <meta property="og:description" content="Automation, data integration & analytics engineer · M.S. Computer Science @ Northeastern University" />
+  <meta property="og:title" content="Shih-Ting Huang | Software Engineer" />
+  <meta property="og:description" content="I turn messy, manual operations into reliable software. Backend &amp; automation · M.S. CS @ Northeastern" />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://hstna.github.io/" />
 
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>👋</text></svg>" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23C2410C'/%3E%3Cpath d='M20.6 11.4c0-1.7-2-2.6-4.6-2.6s-4.6 1-4.6 3c0 4.4 9.2 2.3 9.2 6.8 0 2.2-2.2 3.2-4.6 3.2s-4.6-1-4.6-2.7' fill='none' stroke='%23fff' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E" />
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
-
-  <style>
-    /* ============ 變數 ============ */
-    :root {
-      --bg: #f4f6fb;
-      --surface: #ffffff;
-      --surface-2: #f8fafc;
-      --text-dark: #0f172a;
-      --text: #334155;
-      --text-muted: #64748b;
-      --border: #e6eaf2;
-
-      --primary: #6366f1;
-      --primary-2: #3b82f6;
-      --cyan: #06b6d4;
-      --accent: #10b981;
-
-      --grad: linear-gradient(120deg, #6366f1 0%, #3b82f6 45%, #06b6d4 100%);
-      --grad-text: linear-gradient(120deg, #6366f1, #06b6d4);
-
-      --radius: 16px;
-      --shadow: 0 10px 30px -12px rgba(30, 41, 90, 0.18);
-      --shadow-hover: 0 22px 44px -18px rgba(59, 96, 220, 0.38);
-      --tspeed: 0.4s;
-    }
-
-    [data-theme="dark"] {
-      --bg: #0b1120;
-      --surface: #131c31;
-      --surface-2: #1a2540;
-      --text-dark: #f1f5f9;
-      --text: #cbd5e1;
-      --text-muted: #8494ad;
-      --border: #243252;
-
-      --primary: #818cf8;
-      --primary-2: #60a5fa;
-      --cyan: #22d3ee;
-      --accent: #34d399;
-
-      --grad: linear-gradient(120deg, #818cf8 0%, #60a5fa 45%, #22d3ee 100%);
-      --grad-text: linear-gradient(120deg, #a5b4fc, #67e8f9);
-
-      --shadow: 0 10px 30px -12px rgba(0, 0, 0, 0.6);
-      --shadow-hover: 0 22px 50px -18px rgba(0, 0, 0, 0.7);
-    }
-
-    * { box-sizing: border-box; }
-
-    html { scroll-behavior: smooth; }
-
-    body {
-      font-family: "Inter", "Segoe UI", Arial, sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      margin: 0;
-      line-height: 1.7;
-      overflow-x: hidden;
-      transition: background-color var(--tspeed) ease, color var(--tspeed) ease;
-    }
-
-    h1, h2, h3, h4, .stat-num, .nav-brand {
-      font-family: "Space Grotesk", "Inter", sans-serif;
-    }
-
-    a { color: var(--primary-2); text-decoration: none; }
-    a:hover { text-decoration: underline; }
-
-    /* ============ 導覽列 ============ */
-    nav {
-      position: sticky;
-      top: 0;
-      z-index: 50;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 14px 24px;
-      background: color-mix(in srgb, var(--surface) 78%, transparent);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--border);
-    }
-    .nav-brand {
-      font-weight: 700;
-      font-size: 1.05em;
-      color: var(--text-dark);
-      letter-spacing: -0.3px;
-    }
-    .nav-brand span {
-      background: var(--grad-text);
-      -webkit-background-clip: text;
-      background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-    .nav-links { display: flex; gap: 4px; align-items: center; }
-    .nav-links a {
-      color: var(--text-muted);
-      font-size: 0.9em;
-      font-weight: 500;
-      padding: 6px 12px;
-      border-radius: 8px;
-      transition: color 0.2s, background 0.2s;
-    }
-    .nav-links a:hover { color: var(--text-dark); background: var(--surface-2); text-decoration: none; }
-    @media (max-width: 640px) { .nav-links a:not(.nav-cta) { display: none; } }
-
-    .nav-cta {
-      background: var(--grad);
-      color: #fff !important;
-    }
-    .nav-cta:hover { opacity: 0.92; }
-
-    #theme-toggle {
-      background: var(--surface-2);
-      border: 1px solid var(--border);
-      color: var(--text-dark);
-      border-radius: 10px;
-      width: 38px; height: 38px;
-      font-size: 17px;
-      cursor: pointer;
-      margin-left: 4px;
-      transition: transform 0.2s, background 0.2s;
-    }
-    #theme-toggle:hover { transform: scale(1.08); }
-
-    /* ============ Hero ============ */
-    header {
-      position: relative;
-      text-align: center;
-      padding: 100px 20px 90px;
-      overflow: hidden;
-    }
-    /* 浮動光暈 */
-    .blob {
-      position: absolute;
-      border-radius: 50%;
-      filter: blur(70px);
-      opacity: 0.55;
-      z-index: 0;
-      pointer-events: none;
-    }
-    .blob-1 { width: 380px; height: 380px; background: #6366f1; top: -120px; left: -60px; animation: float1 14s ease-in-out infinite; }
-    .blob-2 { width: 320px; height: 320px; background: #06b6d4; top: -60px; right: -40px; animation: float2 16s ease-in-out infinite; }
-    .blob-3 { width: 300px; height: 300px; background: #3b82f6; bottom: -140px; left: 40%; animation: float1 18s ease-in-out infinite; }
-    [data-theme="dark"] .blob { opacity: 0.32; }
-
-    @keyframes float1 { 0%,100%{transform:translate(0,0)} 50%{transform:translate(30px,40px)} }
-    @keyframes float2 { 0%,100%{transform:translate(0,0)} 50%{transform:translate(-30px,30px)} }
-
-    .hero-inner { position: relative; z-index: 1; max-width: 720px; margin: 0 auto; }
-
-    .avatar {
-      width: 92px; height: 92px;
-      border-radius: 50%;
-      background: var(--grad);
-      color: #fff;
-      display: flex; align-items: center; justify-content: center;
-      font-family: "Space Grotesk", sans-serif;
-      font-weight: 700; font-size: 2em;
-      margin: 0 auto 22px;
-      box-shadow: 0 12px 30px -8px rgba(99,102,241,0.6);
-    }
-
-    .hero-badge {
-      display: inline-flex; align-items: center; gap: 8px;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      color: var(--text-muted);
-      padding: 6px 16px; border-radius: 999px;
-      font-size: 0.85em; font-weight: 500;
-      margin-bottom: 22px;
-      box-shadow: var(--shadow);
-    }
-    .hero-badge .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 30%, transparent); }
-
-    header h1 {
-      font-size: 3.2em;
-      line-height: 1.1;
-      color: var(--text-dark);
-      margin: 0 0 8px;
-      letter-spacing: -1px;
-    }
-    header h1 .grad {
-      background: var(--grad-text);
-      -webkit-background-clip: text; background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-    .hero-role {
-      font-size: 1.2em; font-weight: 600; color: var(--text-dark);
-      margin: 6px 0 14px;
-    }
-    .tagline { font-size: 1.08em; color: var(--text); max-width: 600px; margin: 0 auto 30px; }
-
-    .hero-actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
-    .btn {
-      display: inline-block; padding: 12px 26px; border-radius: 999px;
-      font-weight: 600; font-size: 0.95em; cursor: pointer;
-      transition: transform 0.2s, box-shadow 0.2s, opacity 0.2s;
-    }
-    .btn:hover { text-decoration: none; transform: translateY(-2px); }
-    .btn-primary { background: var(--grad); color: #fff; box-shadow: 0 12px 26px -10px rgba(99,102,241,0.7); }
-    .btn-primary:hover { box-shadow: var(--shadow-hover); }
-    .btn-outline { border: 1.5px solid var(--border); color: var(--text-dark); background: var(--surface); }
-
-    /* ============ 數據列 ============ */
-    .stats {
-      display: grid; grid-template-columns: repeat(4, 1fr);
-      gap: 16px; max-width: 900px; margin: 0 auto;
-      padding: 0 20px;
-      position: relative; z-index: 2;
-      margin-top: -40px;
-    }
-    .stat {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 22px 16px; text-align: center;
-      box-shadow: var(--shadow);
-    }
-    .stat-num {
-      font-size: 1.9em; font-weight: 700;
-      background: var(--grad-text);
-      -webkit-background-clip: text; background-clip: text;
-      -webkit-text-fill-color: transparent;
-      line-height: 1;
-    }
-    .stat-label { font-size: 0.82em; color: var(--text-muted); margin-top: 8px; }
-    @media (max-width: 640px) { .stats { grid-template-columns: repeat(2, 1fr); } }
-
-    /* ============ 主內容 ============ */
-    main { max-width: 880px; margin: 70px auto; padding: 0 20px; }
-
-    section { margin-bottom: 64px; scroll-margin-top: 80px; }
-
-    .section-head { display: flex; align-items: center; gap: 14px; margin-bottom: 28px; }
-    .section-num {
-      font-family: "JetBrains Mono", monospace;
-      font-size: 0.9em; font-weight: 500;
-      color: var(--primary);
-      background: color-mix(in srgb, var(--primary) 12%, transparent);
-      padding: 4px 10px; border-radius: 8px;
-    }
-    .section-head h2 {
-      font-size: 1.7em; color: var(--text-dark); margin: 0; letter-spacing: -0.5px;
-    }
-
-    .panel {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 32px 34px;
-      box-shadow: var(--shadow);
-    }
-    .panel p { margin: 0; }
-
-    /* ============ Timeline ============ */
-    .timeline { position: relative; padding-left: 48px; }
-    .timeline::before {
-      content: ""; position: absolute; left: 15px; top: 8px; bottom: 8px;
-      width: 3px; border-radius: 3px;
-      background: var(--grad);
-      opacity: 0.5;
-    }
-    .titem { position: relative; padding-bottom: 34px; }
-    .titem:last-child { padding-bottom: 0; }
-    .titem .icon {
-      position: absolute; left: -48px; top: 0;
-      width: 34px; height: 34px; border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 16px;
-      background: var(--surface);
-      border: 2px solid var(--primary);
-      box-shadow: var(--shadow);
-    }
-    .titem.edu .icon { border-color: var(--accent); }
-
-    .tdate {
-      font-family: "JetBrains Mono", monospace;
-      font-size: 0.8em; color: var(--text-muted); margin-bottom: 4px;
-    }
-    .ttitle { font-size: 1.15em; font-weight: 700; color: var(--text-dark); margin: 0; }
-    .tsub { color: var(--text); font-weight: 500; margin: 2px 0 10px; }
-    .tsub .loc { color: var(--text-muted); font-weight: 400; }
-    .chip {
-      display: inline-block; font-size: 0.68em; font-weight: 600;
-      padding: 3px 10px; border-radius: 999px; margin-left: 8px;
-      vertical-align: middle; letter-spacing: 0.5px; text-transform: uppercase;
-    }
-    .chip-work { background: color-mix(in srgb, var(--primary) 15%, transparent); color: var(--primary); }
-    .chip-edu  { background: color-mix(in srgb, var(--accent) 18%, transparent); color: var(--accent); }
-    .titem ul { margin: 8px 0 0; padding-left: 18px; }
-    .titem li { margin-bottom: 6px; font-size: 0.96em; }
-
-    /* ============ Projects ============ */
-    .projects-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-    @media (max-width: 680px) { .projects-grid { grid-template-columns: 1fr; } }
-
-    .card {
-      position: relative;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 26px 24px 24px;
-      box-shadow: var(--shadow);
-      overflow: hidden;
-      transition: transform 0.25s, box-shadow 0.25s;
-    }
-    .card::before {
-      content: ""; position: absolute; top: 0; left: 0; right: 0; height: 4px;
-      background: var(--grad);
-    }
-    .card:hover { transform: translateY(-6px); box-shadow: var(--shadow-hover); }
-    .card h3 { margin: 6px 0 2px; font-size: 1.12em; color: var(--text-dark); }
-    .card-date { font-family: "JetBrains Mono", monospace; font-size: 0.76em; color: var(--text-muted); }
-    .card-context { color: var(--primary); font-size: 0.85em; font-weight: 500; margin: 6px 0 12px; }
-    .card ul { margin: 0 0 14px; padding-left: 18px; }
-    .card li { margin-bottom: 6px; font-size: 0.92em; }
-    .card-tags { display: flex; flex-wrap: wrap; gap: 6px; }
-    .mini-tag {
-      font-family: "JetBrains Mono", monospace;
-      font-size: 0.72em; color: var(--text-muted);
-      background: var(--surface-2); border: 1px solid var(--border);
-      padding: 3px 9px; border-radius: 6px;
-    }
-
-    /* ============ Skills ============ */
-    .skill-group { margin-bottom: 20px; }
-    .skill-group:last-child { margin-bottom: 0; }
-    .skill-group h4 { margin: 0 0 10px; color: var(--text-dark); font-size: 1em; }
-    .tags { display: flex; flex-wrap: wrap; gap: 8px; }
-    .tag {
-      background: var(--surface-2);
-      border: 1px solid var(--border);
-      color: var(--text);
-      padding: 6px 14px; border-radius: 999px; font-size: 0.88em;
-      transition: transform 0.2s, border-color 0.2s, color 0.2s;
-    }
-    .tag:hover { transform: translateY(-2px); border-color: var(--primary); color: var(--primary); }
-
-    /* ============ Contact ============ */
-    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
-    @media (max-width: 560px) { .contact-grid { grid-template-columns: 1fr; } }
-    .contact-item {
-      display: flex; align-items: center; gap: 12px;
-      background: var(--surface-2); border: 1px solid var(--border);
-      border-radius: 12px; padding: 14px 18px;
-      transition: transform 0.2s, border-color 0.2s;
-    }
-    .contact-item:hover { transform: translateY(-2px); border-color: var(--primary); text-decoration: none; }
-    .contact-item .ci-icon { font-size: 1.4em; }
-    .contact-item .ci-label { font-size: 0.78em; color: var(--text-muted); }
-    .contact-item .ci-value { color: var(--text-dark); font-weight: 600; font-size: 0.95em; }
-
-    /* ============ 頁尾 ============ */
-    footer { text-align: center; padding: 40px 10px 50px; color: var(--text-muted); font-size: 0.88em; }
-    .social-links { display: flex; justify-content: center; gap: 14px; margin-bottom: 18px; }
-    .social-links a {
-      display: flex; align-items: center; justify-content: center;
-      width: 46px; height: 46px; border-radius: 50%;
-      background: var(--surface); border: 1px solid var(--border);
-      color: var(--text-muted);
-      box-shadow: var(--shadow);
-      transition: transform 0.2s, background 0.25s, color 0.25s, border-color 0.25s;
-    }
-    .social-links a:hover {
-      transform: translateY(-4px);
-      background: var(--grad); color: #fff; border-color: transparent;
-      box-shadow: var(--shadow-hover);
-    }
-    .social-links svg { width: 20px; height: 20px; fill: currentColor; }
-
-    /* ============ 捲動淡入 ============ */
-    .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
-    .reveal.in { opacity: 1; transform: none; }
-
-    @media (prefers-reduced-motion: reduce) {
-      .reveal { opacity: 1; transform: none; transition: none; }
-      .blob { animation: none; }
-      html { scroll-behavior: auto; }
-    }
-
-    @media (max-width: 600px) {
-      header { padding: 70px 16px 70px; }
-      header h1 { font-size: 2.3em; }
-      .panel { padding: 26px 22px; }
-      main { margin: 50px auto; }
-    }
-  </style>
+  <link rel="preload" href="fonts/mono.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="stylesheet" href="css/main.css" />
 </head>
 <body>
+  <a class="skip" href="#main">Skip to content</a>
 
-  <!-- 導覽列 -->
-  <nav>
-    <div class="nav-brand"><span>ST</span> Huang</div>
-    <div class="nav-links">
-      <a href="#about">About</a>
-      <a href="#timeline">Journey</a>
-      <a href="#projects">Projects</a>
-      <a href="#skills">Skills</a>
-      <a href="#contact" class="nav-cta">Contact</a>
-      <button id="theme-toggle" aria-label="Toggle dark mode" title="Toggle dark mode">🌙</button>
-    </div>
+  <nav class="nav js-nav" aria-label="Primary">
+    <a class="nav-brand" href="#top">ST Huang</a>
+    <ul class="nav-list">
+      <li><a href="#chaos">Problem</a></li>
+      <li><a href="#work">Work</a></li>
+      <li><a href="#path">Path</a></li>
+      <li><a href="#life">Life</a></li>
+      <li><a href="#now">Now</a></li>
+    </ul>
+    <button id="theme-toggle" type="button" aria-pressed="false">
+      <svg class="tt-icon tt-moon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+        <path d="M21.6 14.2A8.5 8.5 0 0 1 9.8 2.4a8.5 8.5 0 1 0 11.8 11.8z"/>
+      </svg>
+      <svg class="tt-icon tt-sun" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+        <circle cx="12" cy="12" r="4.2"/>
+        <path d="M12 1.6v2.6M12 19.8v2.6M4.6 4.6l1.9 1.9M17.5 17.5l1.9 1.9M1.6 12h2.6M19.8 12h2.6M4.6 19.4l1.9-1.9M17.5 6.5l1.9-1.9"
+              fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+      </svg>
+      <span class="vh">Dark mode</span>
+    </button>
   </nav>
 
-  <!-- Hero -->
-  <header>
-    <div class="blob blob-1"></div>
-    <div class="blob blob-2"></div>
-    <div class="blob blob-3"></div>
+  <!-- ============ 幕 0 — Hero ============ -->
+  <header class="hero" id="top">
+    <div class="hero-visual" aria-hidden="true">
+      <svg id="hero-fallback" viewBox="0 0 600 300" preserveAspectRatio="xMidYMid slice"></svg>
+      <canvas id="hero-canvas" hidden></canvas>
+    </div>
 
-    <div class="hero-inner">
-      <div class="avatar">SH</div>
-      <div class="hero-badge"><span class="dot"></span> Seeking Software Engineer Internship · Summer 2027</div>
-      <h1>Hi, I’m <span class="grad">Shih-Ting Huang</span> 👋</h1>
-      <p class="hero-role">Software Engineer · Backend &amp; Automation</p>
-      <p class="tagline">
-        Automation &amp; data engineer with 6 years supporting semiconductor supply chains
-        (TSMC, Micron, UMC). Now an M.S. Computer Science student at Northeastern, building
-        reliable software end to end.
+    <div class="hero-copy">
+      <p class="eyebrow"><span class="mono">Seeking SWE Internship</span><br />Summer 2027</p>
+      <h1>I turn messy, manual<br />operations into<br /><em>reliable software.</em></h1>
+      <p class="lede">
+        Shih-Ting Huang — six years building automation, data integration, and
+        planning tools for semiconductor supply chains. Now an M.S. Computer
+        Science student at Northeastern University.
       </p>
-      <div class="hero-actions">
-        <a class="btn btn-primary" href="#projects">View Projects</a>
-        <a class="btn btn-outline" href="mailto:sthuangna@gmail.com">Get in Touch</a>
-      </div>
+      <p class="hero-actions">
+        <a class="btn" href="#work">See the work</a>
+        <a class="btn btn-quiet" href="#now">Get in touch</a>
+      </p>
+      <p class="hero-aside mono">
+        <a href="cv/Shih-Ting-Huang-CV.pdf">Résumé (PDF, 51 KB)<span aria-hidden="true"> ↓</span></a>
+      </p>
     </div>
   </header>
 
-  <!-- 數據亮點 -->
-  <div class="stats">
-    <div class="stat reveal"><div class="stat-num">6+</div><div class="stat-label">Years Experience</div></div>
-    <div class="stat reveal"><div class="stat-num">$6M</div><div class="stat-label">Import Volume Sustained</div></div>
-    <div class="stat reveal"><div class="stat-num">40%</div><div class="stat-label">Fewer Inventory Inquiries</div></div>
-    <div class="stat reveal"><div class="stat-num">15+</div><div class="stat-label">Data Formats Unified</div></div>
-  </div>
+  <main id="main">
 
-  <main>
-    <!-- About -->
-    <section id="about">
-      <div class="section-head reveal"><span class="section-num">01</span><h2>About</h2></div>
-      <div class="panel reveal">
-        <p>
-          I turn messy, manual operations into reliable software. Over the past six years I’ve
-          built ERP integrations, process automation, and data-driven planning tools for supply
-          chain teams — and I’m now pursuing my M.S. in Computer Science at Northeastern University
-          to deepen my engineering foundations. I enjoy working across the stack: Python data
-          pipelines, REST APIs, and pragmatic tools that people actually use every day.
-        </p>
-      </div>
+    <!-- ============ 幕 1 — 混亂 ============ -->
+    <section class="act" id="chaos">
+      <p class="act-num mono">01 — The problem</p>
+      <h2 class="statement">
+        <span class="stat mono" data-count="15">15</span> vendor formats.<br />
+        <span class="stat mono" data-count="3">3</span> days a month.<br />
+        <em>All of it by hand.</em>
+      </h2>
+      <p class="act-body">
+        Procurement data arrived as spreadsheets that no two vendors formatted
+        the same way. Header rows moved. Column names drifted. Someone
+        reconciled it manually, every month, while $6M of pandemic-era import
+        volume depended on getting it right.
+      </p>
     </section>
 
-    <!-- Timeline -->
-    <section id="timeline">
-      <div class="section-head reveal"><span class="section-num">02</span><h2>My Journey</h2></div>
-      <div class="panel reveal">
-        <div class="timeline">
+    <!-- ============ 幕 2 — 收斂 ============ -->
+    <section class="act" id="work">
+      <p class="act-num mono">02 — The work</p>
+      <h2 class="act-title">Four times I closed that gap.</h2>
 
-          <div class="titem edu">
-            <div class="icon">🎓</div>
-            <div class="tdate">Sep 2025 – Apr 2028</div>
-            <p class="ttitle">Northeastern University <span class="chip chip-edu">Education</span></p>
-            <p class="tsub">M.S. in Computer Science <span class="loc">· Seattle, WA, USA</span></p>
-          </div>
-
-          <div class="titem work">
-            <div class="icon">💼</div>
-            <div class="tdate">Mar 2019 – Mar 2025</div>
-            <p class="ttitle">Supertung Industrial Co., Ltd. <span class="chip chip-work">Experience</span></p>
-            <p class="tsub">Procurement Analytics &amp; Automation Specialist <span class="loc">· Taichung, Taiwan</span></p>
-            <ul>
-              <li>Cut monthly procurement data consolidation from 3 days to under 1 hour with an ERP integration tool covering 15+ vendor formats.</li>
-              <li>Sustained $6M in COVID-era import volume via a Python capacity-planning model forecasting warehouse utilization.</li>
-              <li>Ensured material availability for semiconductor fab customers including TSMC, UMC, PSMC, and Micron.</li>
-            </ul>
-          </div>
-
-          <div class="titem work">
-            <div class="icon">💼</div>
-            <div class="tdate">Aug 2017 – Jan 2018</div>
-            <p class="ttitle">Brantabee Italia <span class="chip chip-work">Experience</span></p>
-            <p class="tsub">Software Engineering Intern <span class="loc">· Corciano, Italy</span></p>
-            <ul>
-              <li>Built a Spring Boot REST service mapping RFID scan events to inventory state transitions in PostgreSQL across 200+ smart wine dispensers.</li>
-              <li>Designed idempotent reorder APIs, cutting the duplicate-order rate from ~2% to near-zero.</li>
-            </ul>
-          </div>
-
-          <div class="titem edu">
-            <div class="icon">🎨</div>
-            <div class="tdate">Sep 2013 – Jun 2017</div>
-            <p class="ttitle">Tunghai University <span class="chip chip-edu">Education</span></p>
-            <p class="tsub">B.A. in Industrial Design <span class="loc">· Taichung, Taiwan</span></p>
-          </div>
-
-        </div>
-      </div>
-    </section>
-
-    <!-- Projects -->
-    <section id="projects">
-      <div class="section-head reveal"><span class="section-num">03</span><h2>Projects</h2></div>
-      <div class="projects-grid">
-
-        <article class="card reveal">
-          <span class="card-date">Feb 2026 – Jun 2026</span>
-          <h3>FlexLab Event Board</h3>
-          <p class="card-context">Deployed at Northeastern University FlexLab</p>
-          <ul>
-            <li>Touchscreen event kiosk rendering workshop cards from Supabase via REST API, with images from Supabase Storage.</li>
-            <li>In-app registration + keyword-matched FAQ chatbot with a staff lookup synced from SharePoint via Azure Logic Apps.</li>
-          </ul>
-          <div class="card-tags">
-            <span class="mini-tag">Supabase</span>
-            <span class="mini-tag">REST API</span>
-            <span class="mini-tag">Azure Logic Apps</span>
-          </div>
-        </article>
-
-        <article class="card reveal">
-          <span class="card-date">Jan 2026 – Apr 2026</span>
-          <h3>Topic Voting Platform</h3>
-          <p class="card-context">Team Project</p>
-          <ul>
-            <li>Enforced separation of concerns across 6 views by routing all business logic through a single AppController.</li>
-            <li>Configurable data layer letting the same code run offline (CSV) or against a live Spring Boot REST API.</li>
-          </ul>
-          <div class="card-tags">
-            <span class="mini-tag">Java</span>
-            <span class="mini-tag">Spring Boot</span>
-            <span class="mini-tag">MVC</span>
-          </div>
-        </article>
-
-        <article class="card reveal">
-          <span class="card-date">Mar 2023 – Dec 2023</span>
+      <article class="proj">
+        <header class="proj-head">
           <h3>ERP Data Integration Tool</h3>
-          <p class="card-context">Collaborative Project · deployed internally</p>
-          <ul>
-            <li>Python app auto-detecting header rows across inconsistent Excel layouts, mapping raw columns to 15 canonical fields via regex.</li>
-            <li>Layered ingestion / transformation / validation so new ERP formats onboard by adding regex only.</li>
-          </ul>
-          <div class="card-tags">
-            <span class="mini-tag">Python</span>
-            <span class="mini-tag">pandas</span>
-            <span class="mini-tag">Tkinter</span>
-          </div>
-        </article>
+          <p class="proj-meta mono">Mar 2023 - Dec 2023 · deployed internally</p>
+        </header>
+        <p class="shift">
+          <span class="shift-from">3 days</span>
+          <span class="shift-arrow mono" aria-hidden="true">→</span>
+          <span class="shift-to mono">under 1 hour</span>
+          <span class="shift-what">monthly consolidation</span>
+        </p>
+        <dl class="proj-facts">
+          <dt class="mono">Problem</dt>
+          <dd>Procurement data arrived as spreadsheets that no two vendors formatted the same way. Header rows moved, column names drifted, and someone reconciled it by hand every month.</dd>
+          <dt class="mono">Built</dt>
+          <dd>A Python app that auto-detects the header row in inconsistent Excel layouts and maps raw columns to 15 canonical fields by regex.</dd>
+          <dt class="mono">Decision</dt>
+          <dd>Ingestion, transformation, and validation are separate layers, so onboarding a new ERP format means adding a regex — not touching the pipeline.</dd>
+        </dl>
+        <p class="tags mono"><span>Python</span><span>pandas</span><span>Tkinter</span></p>
+      </article>
 
+      <article class="proj">
+        <header class="proj-head">
+          <h3>RFID Inventory Service</h3>
+          <p class="proj-meta mono">Aug 2017 - Jan 2018 · Brantabee Italia</p>
+        </header>
+        <p class="shift">
+          <span class="shift-from">2% duplicates</span>
+          <span class="shift-arrow mono" aria-hidden="true">→</span>
+          <span class="shift-to mono">near zero</span>
+          <span class="shift-what">duplicate order rate</span>
+        </p>
+        <dl class="proj-facts">
+          <dt class="mono">Problem</dt>
+          <dd>RFID scans drove reordering across 200+ smart wine dispensers, and repeated scans were turning into repeated orders.</dd>
+          <dt class="mono">Built</dt>
+          <dd>A Spring Boot REST service mapping scan events to inventory state transitions in PostgreSQL.</dd>
+          <dt class="mono">Decision</dt>
+          <dd>Made the reorder APIs idempotent, so the same scan arriving twice resolves to one order instead of being deduplicated after the fact.</dd>
+        </dl>
+        <p class="tags mono"><span>Java</span><span>Spring Boot</span><span>PostgreSQL</span></p>
+      </article>
+
+      <article class="proj">
+        <header class="proj-head">
+          <h3>FlexLab Event Board</h3>
+          <p class="proj-meta mono">Feb 2026 - Jun 2026 · Northeastern FlexLab</p>
+        </header>
+        <p class="shift">
+          <span class="shift-from">clipboard and word of mouth</span>
+          <span class="shift-arrow mono" aria-hidden="true">→</span>
+          <span class="shift-to mono">one screen</span>
+          <span class="shift-what">sign-ups, tool loans, and the questions staff kept answering</span>
+        </p>
+        <dl class="proj-facts">
+          <dt class="mono">Problem</dt>
+          <dd>Workshop sign-ups were manual, the tool-loan log lived on a clipboard, and the same few questions went to whoever was standing nearby.</dd>
+          <dt class="mono">Built</dt>
+          <dd>A touchscreen kiosk with four modes — workshop and training listings with in-app registration, a month calendar, and tool borrowing and returns — backed by Supabase over REST.</dd>
+          <dt class="mono">Decision</dt>
+          <dd>Availability is derived from open loan records rather than stored as a counter. A counter drifts permanently the first time a write fails, and nothing surfaces the error.</dd>
+        </dl>
+        <p class="tags mono"><span>Supabase</span><span>REST API</span><span>Azure Logic Apps</span></p>
+        <p class="proj-links mono">
+          <a href="https://hstna.github.io/flexlab-kiosk/" rel="noopener noreferrer">
+            Open the kiosk<span aria-hidden="true"> ↗</span>
+          </a>
+          <a href="https://github.com/hstna/flexlab-kiosk" rel="noopener noreferrer">
+            Source<span aria-hidden="true"> ↗</span>
+          </a>
+        </p>
+      </article>
+
+      <article class="proj">
+        <header class="proj-head">
+          <h3>Topic Voting Platform</h3>
+          <p class="proj-meta mono">Jan 2026 - Apr 2026 · 3-person team · sole developer</p>
+        </header>
+        <p class="shift">
+          <span class="shift-from">logic in the views</span>
+          <span class="shift-arrow mono" aria-hidden="true">→</span>
+          <span class="shift-to mono">1 controller, 126 tests</span>
+          <span class="shift-what">business rules testable without the UI</span>
+        </p>
+        <dl class="proj-facts">
+          <dt class="mono">Problem</dt>
+          <dd>A JavaFX app where six screens all read and mutate the same voting data. Left in the views, that logic is untestable and behaviour drifts per screen.</dd>
+          <dt class="mono">Built</dt>
+          <dd>Every state change routes through a single AppController, which depends on four repository interfaces rather than concrete storage. In-memory implementations back the app today; an HTTP client built on the JDK&rsquo;s <code>java.net.http</code> can point the same controller at a REST backend.</dd>
+          <dt class="mono">Decision</dt>
+          <dd>Because no business rule lives in a view, all of it runs headless — 126 JUnit tests across 13 files, 39 of them on the controller alone.</dd>
+        </dl>
+        <p class="tags mono"><span>Java</span><span>JavaFX</span><span>JUnit</span><span>Jackson</span></p>
+        <p class="proj-links mono">
+          <a href="https://github.com/hstna/topic-voting-platform" rel="noopener noreferrer">
+            Source<span aria-hidden="true"> ↗</span>
+          </a>
+        </p>
+      </article>
+    </section>
+
+    <!-- ============ 幕 3 — 路徑 ============ -->
+    <section class="act" id="path">
+      <p class="act-num mono">03 — The path</p>
+      <h2 class="act-title">Industrial design to computer science.</h2>
+
+      <ol class="path-list">
+        <li class="path-item">
+          <p class="path-date mono">Sep 2025 - Present</p>
+          <h3>Northeastern University</h3>
+          <p class="path-sub">M.S. Computer Science <span class="muted">· Seattle, WA</span></p>
+        </li>
+        <li class="path-item">
+          <p class="path-date mono">Mar 2019 - Mar 2025</p>
+          <h3>Supertung Industrial Co., Ltd.</h3>
+          <p class="path-sub">Procurement Analytics &amp; Automation Specialist <span class="muted">· Taichung, Taiwan</span></p>
+          <p class="path-body">
+            Built the ERP integration tool and a Python capacity-planning model
+            forecasting warehouse utilization, sustaining $6M in import volume.
+            Ensured material availability for fab customers including TSMC, UMC,
+            PSMC, and Micron.
+          </p>
+        </li>
+        <li class="path-item">
+          <p class="path-date mono">Aug 2017 - Jan 2018</p>
+          <h3>Brantabee Italia</h3>
+          <p class="path-sub">Software Engineering Intern <span class="muted">· Corciano, Italy</span></p>
+        </li>
+        <li class="path-item">
+          <p class="path-date mono">Sep 2013 - Jun 2017</p>
+          <h3>Tunghai University</h3>
+          <p class="path-sub">B.A. Industrial Design <span class="muted">· Taichung, Taiwan</span></p>
+        </li>
+      </ol>
+    </section>
+
+    <!-- ============ 幕 4 — 鏡頭之外 ============ -->
+    <section class="act" id="life">
+      <p class="act-num mono">04 — Off the clock</p>
+      <h2 class="act-title">I was trained to look before I was trained to build.</h2>
+
+      <div class="about">
+        <picture class="portrait">
+      <img src="img/portrait-1x.jpg" srcset="img/portrait-2x.jpg 2x"
+           width="440" height="550" loading="lazy" decoding="async"
+           alt="Shih-Ting Huang" />
+    </picture>
+
+        <div class="about-body">
+          <p>
+            My first degree was industrial design. Four years of it taught me to
+            study how people actually use a thing before deciding what to make —
+            which turns out to be the same instinct behind good software.
+          </p>
+          <p>
+            I still shoot. Photography is the part of that training I never put
+            down: framing, waiting, and knowing which details to leave out. It is
+            the closest thing I have to a hobby that also makes me better at my job.
+          </p>
+        </div>
+      </div>
+
+      <div class="strip" id="strip" role="region" aria-label="Photography" tabindex="0">
+        <ul class="strip-track" id="strip-track">
+          <li>
+            <picture>
+              <img src="img/1889501_0-1x.jpg" srcset="img/1889501_0-2x.jpg 2x"
+                   width="535" height="300" loading="lazy" decoding="async" alt=""/>
+            </picture>
+          </li>
+          <li>
+            <picture>
+              <source type="image/avif" srcset="img/1889502_0-1x.avif 1x, img/1889502_0-2x.avif 2x"/>
+              <img src="img/1889502_0-1x.jpg" srcset="img/1889502_0-2x.jpg 2x"
+                   width="168" height="300" loading="lazy" decoding="async" alt=""/>
+            </picture>
+          </li>
+          <li>
+            <picture>
+              <source type="image/avif" srcset="img/1889503-1x.avif 1x, img/1889503-2x.avif 2x"/>
+              <img src="img/1889503-1x.jpg" srcset="img/1889503-2x.jpg 2x"
+                   width="168" height="300" loading="lazy" decoding="async" alt=""/>
+            </picture>
+          </li>
+          <li>
+            <picture>
+              <source type="image/avif" srcset="img/1889504_0-1x.avif 1x, img/1889504_0-2x.avif 2x"/>
+              <img src="img/1889504_0-1x.jpg" srcset="img/1889504_0-2x.jpg 2x"
+                   width="169" height="300" loading="lazy" decoding="async" alt=""/>
+            </picture>
+          </li>
+          <li>
+            <picture>
+              <source type="image/avif" srcset="img/1889505_0-1x.avif 1x, img/1889505_0-2x.avif 2x"/>
+              <img src="img/1889505_0-1x.jpg" srcset="img/1889505_0-2x.jpg 2x"
+                   width="169" height="300" loading="lazy" decoding="async" alt=""/>
+            </picture>
+          </li>
+          <li>
+            <picture>
+              <img src="img/1889506_0-1x.jpg" srcset="img/1889506_0-2x.jpg 2x"
+                   width="535" height="300" loading="lazy" decoding="async" alt=""/>
+            </picture>
+          </li>
+          <li>
+            <picture>
+              <source type="image/avif" srcset="img/1889507_0-1x.avif 1x, img/1889507_0-2x.avif 2x"/>
+              <img src="img/1889507_0-1x.jpg" srcset="img/1889507_0-2x.jpg 2x"
+                   width="168" height="300" loading="lazy" decoding="async" alt=""/>
+            </picture>
+          </li>
+          <li>
+            <picture>
+              <source type="image/avif" srcset="img/1889508_0-1x.avif 1x, img/1889508_0-2x.avif 2x"/>
+              <img src="img/1889508_0-1x.jpg" srcset="img/1889508_0-2x.jpg 2x"
+                   width="169" height="300" loading="lazy" decoding="async" alt=""/>
+            </picture>
+          </li>
+          <li>
+            <picture>
+              <source type="image/avif" srcset="img/1889509_0-1x.avif 1x, img/1889509_0-2x.avif 2x"/>
+              <img src="img/1889509_0-1x.jpg" srcset="img/1889509_0-2x.jpg 2x"
+                   width="168" height="300" loading="lazy" decoding="async" alt=""/>
+            </picture>
+          </li>
+          <li>
+            <picture>
+              <img src="img/1889510_0-1x.jpg" srcset="img/1889510_0-2x.jpg 2x"
+                   width="533" height="300" loading="lazy" decoding="async" alt=""/>
+            </picture>
+          </li>
+          <li>
+            <picture>
+              <source type="image/avif" srcset="img/1889511_0-1x.avif 1x, img/1889511_0-2x.avif 2x"/>
+              <img src="img/1889511_0-1x.jpg" srcset="img/1889511_0-2x.jpg 2x"
+                   width="169" height="300" loading="lazy" decoding="async" alt=""/>
+            </picture>
+          </li>
+          <li>
+            <picture>
+              <source type="image/avif" srcset="img/1889512_0-1x.avif 1x, img/1889512_0-2x.avif 2x"/>
+              <img src="img/1889512_0-1x.jpg" srcset="img/1889512_0-2x.jpg 2x"
+                   width="169" height="300" loading="lazy" decoding="async" alt=""/>
+            </picture>
+          </li>
+          <li>
+            <picture>
+              <source type="image/avif" srcset="img/1889513_0-1x.avif 1x, img/1889513_0-2x.avif 2x"/>
+              <img src="img/1889513_0-1x.jpg" srcset="img/1889513_0-2x.jpg 2x"
+                   width="169" height="300" loading="lazy" decoding="async" alt=""/>
+            </picture>
+          </li>
+          <li>
+            <picture>
+              <img src="img/1889514_0-1x.jpg" srcset="img/1889514_0-2x.jpg 2x"
+                   width="533" height="300" loading="lazy" decoding="async" alt=""/>
+            </picture>
+          </li>
+          <li>
+            <picture>
+              <source type="image/avif" srcset="img/1889515_0-1x.avif 1x, img/1889515_0-2x.avif 2x"/>
+              <img src="img/1889515_0-1x.jpg" srcset="img/1889515_0-2x.jpg 2x"
+                   width="168" height="300" loading="lazy" decoding="async" alt=""/>
+            </picture>
+          </li>
+          <li>
+            <picture>
+              <source type="image/avif" srcset="img/1889517_0-1x.avif 1x, img/1889517_0-2x.avif 2x"/>
+              <img src="img/1889517_0-1x.jpg" srcset="img/1889517_0-2x.jpg 2x"
+                   width="168" height="300" loading="lazy" decoding="async" alt=""/>
+            </picture>
+          </li>
+          <li>
+            <picture>
+              <source type="image/avif" srcset="img/1889520_0-1x.avif 1x, img/1889520_0-2x.avif 2x"/>
+              <img src="img/1889520_0-1x.jpg" srcset="img/1889520_0-2x.jpg 2x"
+                   width="169" height="300" loading="lazy" decoding="async" alt=""/>
+            </picture>
+          </li>
+          <li aria-hidden="true">
+            <picture>
+              <img src="img/1889501_0-1x.jpg" srcset="img/1889501_0-2x.jpg 2x"
+                   width="535" height="300" loading="lazy" decoding="async" alt=""/>
+            </picture>
+          </li>
+          <li aria-hidden="true">
+            <picture>
+              <source type="image/avif" srcset="img/1889502_0-1x.avif 1x, img/1889502_0-2x.avif 2x"/>
+              <img src="img/1889502_0-1x.jpg" srcset="img/1889502_0-2x.jpg 2x"
+                   width="168" height="300" loading="lazy" decoding="async" alt=""/>
+            </picture>
+          </li>
+          <li aria-hidden="true">
+            <picture>
+              <source type="image/avif" srcset="img/1889503-1x.avif 1x, img/1889503-2x.avif 2x"/>
+              <img src="img/1889503-1x.jpg" srcset="img/1889503-2x.jpg 2x"
+                   width="168" height="300" loading="lazy" decoding="async" alt=""/>
+            </picture>
+          </li>
+          <li aria-hidden="true">
+            <picture>
+              <source type="image/avif" srcset="img/1889504_0-1x.avif 1x, img/1889504_0-2x.avif 2x"/>
+              <img src="img/1889504_0-1x.jpg" srcset="img/1889504_0-2x.jpg 2x"
+                   width="169" height="300" loading="lazy" decoding="async" alt=""/>
+            </picture>
+          </li>
+          <li aria-hidden="true">
+            <picture>
+              <source type="image/avif" srcset="img/1889505_0-1x.avif 1x, img/1889505_0-2x.avif 2x"/>
+              <img src="img/1889505_0-1x.jpg" srcset="img/1889505_0-2x.jpg 2x"
+                   width="169" height="300" loading="lazy" decoding="async" alt=""/>
+            </picture>
+          </li>
+          <li aria-hidden="true">
+            <picture>
+              <img src="img/1889506_0-1x.jpg" srcset="img/1889506_0-2x.jpg 2x"
+                   width="535" height="300" loading="lazy" decoding="async" alt=""/>
+            </picture>
+          </li>
+          <li aria-hidden="true">
+            <picture>
+              <source type="image/avif" srcset="img/1889507_0-1x.avif 1x, img/1889507_0-2x.avif 2x"/>
+              <img src="img/1889507_0-1x.jpg" srcset="img/1889507_0-2x.jpg 2x"
+                   width="168" height="300" loading="lazy" decoding="async" alt=""/>
+            </picture>
+          </li>
+          <li aria-hidden="true">
+            <picture>
+              <source type="image/avif" srcset="img/1889508_0-1x.avif 1x, img/1889508_0-2x.avif 2x"/>
+              <img src="img/1889508_0-1x.jpg" srcset="img/1889508_0-2x.jpg 2x"
+                   width="169" height="300" loading="lazy" decoding="async" alt=""/>
+            </picture>
+          </li>
+          <li aria-hidden="true">
+            <picture>
+              <source type="image/avif" srcset="img/1889509_0-1x.avif 1x, img/1889509_0-2x.avif 2x"/>
+              <img src="img/1889509_0-1x.jpg" srcset="img/1889509_0-2x.jpg 2x"
+                   width="168" height="300" loading="lazy" decoding="async" alt=""/>
+            </picture>
+          </li>
+          <li aria-hidden="true">
+            <picture>
+              <img src="img/1889510_0-1x.jpg" srcset="img/1889510_0-2x.jpg 2x"
+                   width="533" height="300" loading="lazy" decoding="async" alt=""/>
+            </picture>
+          </li>
+          <li aria-hidden="true">
+            <picture>
+              <source type="image/avif" srcset="img/1889511_0-1x.avif 1x, img/1889511_0-2x.avif 2x"/>
+              <img src="img/1889511_0-1x.jpg" srcset="img/1889511_0-2x.jpg 2x"
+                   width="169" height="300" loading="lazy" decoding="async" alt=""/>
+            </picture>
+          </li>
+          <li aria-hidden="true">
+            <picture>
+              <source type="image/avif" srcset="img/1889512_0-1x.avif 1x, img/1889512_0-2x.avif 2x"/>
+              <img src="img/1889512_0-1x.jpg" srcset="img/1889512_0-2x.jpg 2x"
+                   width="169" height="300" loading="lazy" decoding="async" alt=""/>
+            </picture>
+          </li>
+          <li aria-hidden="true">
+            <picture>
+              <source type="image/avif" srcset="img/1889513_0-1x.avif 1x, img/1889513_0-2x.avif 2x"/>
+              <img src="img/1889513_0-1x.jpg" srcset="img/1889513_0-2x.jpg 2x"
+                   width="169" height="300" loading="lazy" decoding="async" alt=""/>
+            </picture>
+          </li>
+          <li aria-hidden="true">
+            <picture>
+              <img src="img/1889514_0-1x.jpg" srcset="img/1889514_0-2x.jpg 2x"
+                   width="533" height="300" loading="lazy" decoding="async" alt=""/>
+            </picture>
+          </li>
+          <li aria-hidden="true">
+            <picture>
+              <source type="image/avif" srcset="img/1889515_0-1x.avif 1x, img/1889515_0-2x.avif 2x"/>
+              <img src="img/1889515_0-1x.jpg" srcset="img/1889515_0-2x.jpg 2x"
+                   width="168" height="300" loading="lazy" decoding="async" alt=""/>
+            </picture>
+          </li>
+          <li aria-hidden="true">
+            <picture>
+              <source type="image/avif" srcset="img/1889517_0-1x.avif 1x, img/1889517_0-2x.avif 2x"/>
+              <img src="img/1889517_0-1x.jpg" srcset="img/1889517_0-2x.jpg 2x"
+                   width="168" height="300" loading="lazy" decoding="async" alt=""/>
+            </picture>
+          </li>
+          <li aria-hidden="true">
+            <picture>
+              <source type="image/avif" srcset="img/1889520_0-1x.avif 1x, img/1889520_0-2x.avif 2x"/>
+              <img src="img/1889520_0-1x.jpg" srcset="img/1889520_0-2x.jpg 2x"
+                   width="169" height="300" loading="lazy" decoding="async" alt=""/>
+            </picture>
+          </li>
+        </ul>
       </div>
     </section>
 
-    <!-- Skills -->
-    <section id="skills">
-      <div class="section-head reveal"><span class="section-num">04</span><h2>Technical Skills</h2></div>
-      <div class="panel reveal">
-        <div class="skill-group">
-          <h4>Languages</h4>
-          <div class="tags"><span class="tag">Python</span><span class="tag">SQL</span><span class="tag">Java</span></div>
+    <!-- ============ 幕 5 — 現在 ============ -->
+    <section class="act" id="now">
+      <p class="act-num mono">05 — Now</p>
+      <h2 class="act-title">What I work with, and where to find me.</h2>
+
+      <div class="skills">
+        <div class="skill-row">
+          <h3 class="mono">Languages</h3>
+          <p>Python · SQL · Java</p>
         </div>
-        <div class="skill-group">
-          <h4>Data &amp; Analytics</h4>
-          <div class="tags">
-            <span class="tag">pandas</span><span class="tag">PostgreSQL</span><span class="tag">ETL pipelines</span>
-            <span class="tag">Data modeling</span><span class="tag">Process automation</span><span class="tag">REST APIs</span>
-          </div>
+        <div class="skill-row">
+          <h3 class="mono">Data</h3>
+          <p>pandas · PostgreSQL · ETL pipelines · Data modeling · Process automation · REST APIs</p>
         </div>
-        <div class="skill-group">
-          <h4>Cloud &amp; Tools</h4>
-          <div class="tags">
-            <span class="tag">AWS Certified AI Practitioner</span><span class="tag">Azure</span><span class="tag">Git</span>
-            <span class="tag">Google Apps Script</span><span class="tag">Tkinter</span>
-          </div>
+        <div class="skill-row">
+          <h3 class="mono">Cloud &amp; tools</h3>
+          <p>AWS Certified AI Practitioner · Azure · Git · Google Apps Script · Tkinter</p>
         </div>
-        <div class="skill-group">
-          <h4>Industry Knowledge</h4>
-          <div class="tags">
-            <span class="tag">Fab utility systems (CDS, UPW, wastewater)</span>
-            <span class="tag">Demand forecasting</span><span class="tag">Supply chain analytics</span>
-          </div>
+        <div class="skill-row">
+          <h3 class="mono">Domain</h3>
+          <p>Fab utility systems (CDS, UPW, wastewater) · Demand forecasting · Supply chain analytics</p>
         </div>
       </div>
-    </section>
 
-    <!-- Contact -->
-    <section id="contact">
-      <div class="section-head reveal"><span class="section-num">05</span><h2>Get in Touch</h2></div>
-      <div class="contact-grid">
-        <a class="contact-item reveal" href="mailto:sthuangna@gmail.com">
-          <span class="ci-icon">📧</span>
-          <span><span class="ci-label">Email</span><br><span class="ci-value">sthuangna@gmail.com</span></span>
-        </a>
-        <a class="contact-item reveal" href="https://www.linkedin.com/in/hstna/" target="_blank" rel="noopener noreferrer">
-          <span class="ci-icon">💼</span>
-          <span><span class="ci-label">LinkedIn</span><br><span class="ci-value">linkedin.com/in/hstna</span></span>
-        </a>
-        <a class="contact-item reveal" href="https://github.com/hstna" target="_blank" rel="noopener noreferrer">
-          <span class="ci-icon">🐙</span>
-          <span><span class="ci-label">GitHub</span><br><span class="ci-value">github.com/hstna</span></span>
-        </a>
-        <div class="contact-item reveal">
-          <span class="ci-icon">📍</span>
-          <span><span class="ci-label">Location</span><br><span class="ci-value">Seattle, WA</span></span>
-        </div>
+      <div class="contact">
+        <p class="contact-line">
+          <svg class="ci" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+            <path d="M3 5h18a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1zm1.7 2L12 12.2 19.3 7H4.7zM20 8.7l-7.4 5.2a1 1 0 0 1-1.2 0L4 8.7V17h16V8.7z"/>
+          </svg>
+          <span class="vh">Email</span>
+          <a href="mailto:sthuangna@gmail.com">sthuangna@gmail.com</a>
+          <button id="copy-email" type="button" data-email="sthuangna@gmail.com">
+            <span class="copy-label">Copy</span>
+          </button>
+        </p>
+        <p class="contact-line">
+          <svg class="ci" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zm0 2.5L17.5 8H14V4.5zM8 12h8v1.6H8V12zm0 3.4h8V17H8v-1.6z"/>
+          </svg>
+          <span class="vh">Résumé</span>
+          <a href="cv/Shih-Ting-Huang-CV.pdf">Shih-Ting-Huang-CV.pdf</a>
+        </p>
+        <p class="contact-line">
+          <svg class="ci" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+            <path d="M4.98 3.5A2.5 2.5 0 1 1 0 3.51 2.5 2.5 0 0 1 4.98 3.5zM.25 8.25h4.5V24h-4.5V8.25zM8.25 8.25h4.31v2.15h.06c.6-1.14 2.07-2.34 4.26-2.34 4.56 0 5.4 3 5.4 6.9V24h-4.5v-6.99c0-1.67-.03-3.82-2.33-3.82-2.33 0-2.69 1.82-2.69 3.7V24h-4.5V8.25z"/>
+          </svg>
+          <span class="vh">LinkedIn</span>
+          <a href="https://www.linkedin.com/in/hstna/" rel="noopener noreferrer">linkedin.com/in/hstna</a>
+        </p>
+        <p class="contact-line">
+          <svg class="ci" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+            <path d="M12 .5C5.37.5 0 5.87 0 12.5c0 5.3 3.44 9.8 8.21 11.39.6.11.82-.26.82-.58v-2.03c-3.34.73-4.04-1.61-4.04-1.61-.55-1.39-1.34-1.76-1.34-1.76-1.09-.75.08-.73.08-.73 1.21.09 1.84 1.24 1.84 1.24 1.07 1.83 2.81 1.3 3.5.99.11-.78.42-1.3.76-1.6-2.67-.3-5.47-1.34-5.47-5.95 0-1.31.47-2.39 1.24-3.23-.12-.3-.54-1.52.12-3.18 0 0 1.01-.32 3.3 1.23a11.5 11.5 0 0 1 6 0c2.29-1.55 3.3-1.23 3.3-1.23.66 1.66.24 2.88.12 3.18.77.84 1.24 1.92 1.24 3.23 0 4.62-2.81 5.64-5.49 5.94.43.37.81 1.1.81 2.22v3.29c0 .32.22.7.83.58A12 12 0 0 0 24 12.5C24 5.87 18.63.5 12 .5z"/>
+          </svg>
+          <span class="vh">GitHub</span>
+          <a href="https://github.com/hstna" rel="noopener noreferrer">github.com/hstna</a>
+        </p>
+        <address class="contact-line">
+          <svg class="ci" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+            <path d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/>
+          </svg>
+          <span class="vh">Based in</span>
+          <span>Seattle, WA</span>
+        </address>
       </div>
     </section>
   </main>
 
-  <footer>
-    <div class="social-links">
-      <a href="mailto:sthuangna@gmail.com" title="Email" aria-label="Email">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 4h20a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1zm10 8.5L3.5 6.7V18h17V6.7L12 12.5zM4.4 5l7.6 5.2L19.6 5H4.4z"/></svg>
-      </a>
-      <a href="https://www.linkedin.com/in/hstna/" target="_blank" title="LinkedIn" aria-label="LinkedIn" rel="noopener noreferrer">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.98 3.5A2.5 2.5 0 1 1 0 3.51 2.5 2.5 0 0 1 4.98 3.5zM.25 8.25h4.5V24h-4.5V8.25zM8.25 8.25h4.31v2.15h.06c.6-1.14 2.07-2.34 4.26-2.34 4.56 0 5.4 3 5.4 6.9V24h-4.5v-6.99c0-1.67-.03-3.82-2.33-3.82-2.33 0-2.69 1.82-2.69 3.7V24h-4.5V8.25z"/></svg>
-      </a>
-      <a href="https://github.com/hstna" target="_blank" title="GitHub" aria-label="GitHub" rel="noopener noreferrer">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .5C5.37.5 0 5.87 0 12.5c0 5.3 3.44 9.8 8.21 11.39.6.11.82-.26.82-.58v-2.03c-3.34.73-4.04-1.61-4.04-1.61-.55-1.39-1.34-1.76-1.34-1.76-1.09-.75.08-.73.08-.73 1.21.09 1.84 1.24 1.84 1.24 1.07 1.83 2.81 1.3 3.5.99.11-.78.42-1.3.76-1.6-2.67-.3-5.47-1.34-5.47-5.95 0-1.31.47-2.39 1.24-3.23-.12-.3-.54-1.52.12-3.18 0 0 1.01-.32 3.3 1.23a11.5 11.5 0 0 1 6 0c2.29-1.55 3.3-1.23 3.3-1.23.66 1.66.24 2.88.12 3.18.77.84 1.24 1.92 1.24 3.23 0 4.62-2.81 5.64-5.49 5.94.43.37.81 1.1.81 2.22v3.29c0 .32.22.7.83.58A12 12 0 0 0 24 12.5C24 5.87 18.63.5 12 .5z"/></svg>
-      </a>
-    </div>
-    <p>© <span id="year">2026</span> Shih-Ting Huang. All rights reserved.</p>
+  <footer class="foot">
+    <p class="mono">© <span id="year">2026</span> Shih-Ting Huang</p>
+    <p class="foot-note">
+      Built as one static page. No trackers, no third-party requests, no
+      framework. The hero animation does not run if your device is low on
+      power, on a metered connection, or you have asked for reduced motion.
+    </p>
   </footer>
 
-  <script>
-    document.getElementById('year').textContent = new Date().getFullYear();
 
-    // 深色模式
-    const toggleBtn = document.getElementById('theme-toggle');
-    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
-    const saved = localStorage.getItem('theme');
-    if (saved === 'dark' || (!saved && prefersDark.matches)) {
-      document.documentElement.setAttribute('data-theme', 'dark');
-      toggleBtn.textContent = '☀️';
-    }
-    toggleBtn.addEventListener('click', () => {
-      const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-      if (isDark) {
-        document.documentElement.removeAttribute('data-theme');
-        localStorage.setItem('theme', 'light');
-        toggleBtn.textContent = '🌙';
-      } else {
-        document.documentElement.setAttribute('data-theme', 'dark');
-        localStorage.setItem('theme', 'dark');
-        toggleBtn.textContent = '☀️';
-      }
-    });
-
-    // 捲動淡入
-    const io = new IntersectionObserver((entries) => {
-      entries.forEach((e, i) => {
-        if (e.isIntersecting) {
-          e.target.style.transitionDelay = (e.target.dataset.delay || '0ms');
-          e.target.classList.add('in');
-          io.unobserve(e.target);
-        }
-      });
-    }, { threshold: 0.12 });
-    document.querySelectorAll('.reveal').forEach((el, i) => {
-      el.dataset.delay = (i % 4) * 80 + 'ms';
-      io.observe(el);
-    });
-  </script>
-
+  <script src="js/main.js" type="module"></script>
 </body>
 </html>
