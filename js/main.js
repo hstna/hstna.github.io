@@ -216,12 +216,23 @@ const counters = [...document.querySelectorAll('[data-count]')].map((el) => {
 if (counters.length) {
   if (reduceMotion) {
     counters.forEach((c) => { c.el.textContent = c.final; });
+    document.querySelectorAll('[data-reveal-at]').forEach((el) => el.classList.add('in'));
   } else {
     /* 曲線要夠平緩。cubic ease-out 在行程 68% 時就已經四捨五入到終值，
        數字會在使用者抵達之前就停住。1.5 次方大約在 90% 才收斂。 */
     const easeOut = (t) => 1 - Math.pow(1 - t, 1.5);
 
+        /* 跟著同一條捲動進度浮現的補充句 */
+    const asides = [...document.querySelectorAll('[data-reveal-at]')].map((el) => ({
+      el, at: parseFloat(el.dataset.revealAt) || 0.9,
+    }));
+
     function paint() {
+      for (const a of asides) {
+        const top = a.el.getBoundingClientRect().top;
+        const p = Math.min(Math.max((innerHeight - top) / (innerHeight * 0.78), 0), 1);
+        a.el.classList.toggle('in', p >= a.at);
+      }
       for (const c of counters) {
         if (c.target === undefined) { c.el.textContent = c.final; continue; }
         const top = c.el.getBoundingClientRect().top;

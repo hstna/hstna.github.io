@@ -23,6 +23,8 @@
   --font-mono: "Mono", ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas, monospace;
 
   --measure: 68ch;
+  /* 所有內文共用同一個行寬，否則每一段的換行位置都不一樣 */
+  --prose: 60ch;
   --gutter: clamp(20px, 5vw, 48px);
   --step: clamp(64px, 10vw, 128px);
   /* 版面容器：不置中的話，寬螢幕上右半邊會整片空白 */
@@ -175,7 +177,7 @@ main a[href], .foot a[href] {
 
 .hero-copy { position: relative; width: 100%; }
 .eyebrow { color: var(--muted); font-size: 0.85rem; margin-bottom: 24px; }
-.lede { color: var(--muted); max-width: 46ch; margin: 24px 0 34px; }
+.lede { color: var(--muted); max-width: var(--prose); margin: 24px 0 34px; }
 
 .hero-actions { display: flex; gap: 12px; flex-wrap: wrap; }
 .hero-aside { margin-top: 18px; }
@@ -204,7 +206,7 @@ main { padding: 0 var(--edge); }
 }
 .act-num { color: var(--muted); display: block; margin-bottom: 28px; }
 .act-title { margin-bottom: 40px; }
-.act-body { color: var(--muted); max-width: 56ch; margin-top: 28px; }
+.act-body { color: var(--muted); max-width: var(--prose); margin-top: 28px; }
 
 /* 寬螢幕：段落編號與 hero 的 eyebrow 移到左側欄，正文靠右欄。
    否則 68ch 的文字欄會讓右半個畫面整片空白。 */
@@ -225,6 +227,17 @@ main { padding: 0 var(--edge); }
 }
 
 .statement { font-size: clamp(1.9rem, 5.5vw, 3rem); line-height: 1.25; }
+/* 數字跑完之後才浮現的補充句。單一數字必然低估，這一行讓它誠實。 */
+.statement .aside {
+  color: var(--muted);
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+.statement .aside.in { opacity: 1; }
+@media (prefers-reduced-motion: reduce) {
+  .statement .aside { opacity: 1; transition: none; }
+}
+
 .statement .stat {
   font-size: 1em;
   color: var(--accent);
@@ -236,7 +249,6 @@ main { padding: 0 var(--edge); }
 .proj:first-of-type { border-top: none; padding-top: 0; }
 .proj-head { margin-bottom: 20px; }
 .proj-meta { color: var(--muted); margin-top: 4px; }
-.proj-body { color: var(--muted); max-width: 56ch; margin: 18px 0; }
 
 /* before → after 轉場 */
 .shift {
@@ -258,7 +270,7 @@ main { padding: 0 var(--edge); }
 .proj-facts dd {
   color: var(--muted);
   margin: 0;
-  max-width: 60ch;
+  max-width: var(--prose);
   grid-column: 2;
 }
 .proj-facts dd + dt { margin-top: 14px; }
@@ -303,7 +315,7 @@ main { padding: 0 var(--edge); }
 }
 .path-date { color: var(--muted); margin-bottom: 6px; }
 .path-sub { color: var(--muted); font-size: 0.95rem; margin-top: 3px; }
-.path-body { color: var(--muted); font-size: 0.95rem; max-width: 54ch; margin-top: 12px; }
+.path-body { color: var(--muted); font-size: 0.95rem; max-width: var(--prose); margin-top: 12px; }
 
 /* 微互動 4：時間線隨捲動繪出，零 JS */
 @media (prefers-reduced-motion: no-preference) {
@@ -336,7 +348,7 @@ main { padding: 0 var(--edge); }
   transition: filter 0.4s ease;
 }
 .portrait:hover img { filter: grayscale(0); }
-.about-body p { color: var(--muted); max-width: 56ch; }
+.about-body p { color: var(--muted); max-width: var(--prose); }
 .about-body p + p { margin-top: 16px; }
 
 
@@ -388,7 +400,7 @@ main { padding: 0 var(--edge); }
   padding: 16px 0; border-top: 1px solid var(--rule);
 }
 .skill-row h3 { color: var(--muted); font-weight: 500; }
-.skill-row p { max-width: 60ch; }
+.skill-row p { max-width: var(--prose); }
 @media (max-width: 560px) {
   .skill-row { grid-template-columns: 1fr; gap: 6px; }
 }

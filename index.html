@@ -74,27 +74,32 @@
     <section class="act" id="chaos">
       <p class="act-num mono">01 — The problem</p>
       <h2 class="statement">
-        <span class="stat mono" data-count="15">15</span> vendor formats.<br />
-        <span class="stat mono" data-count="3">3</span> days a month.<br />
+        <span class="stat mono" data-count="15+">15+</span> vendor formats.<br />
+        <span class="stat mono" data-count="36">36</span> days a year.<br />
+        <span class="aside" data-reveal-at="0.86">And that was one report.</span><br />
         <em>All of it by hand.</em>
       </h2>
       <p class="act-body">
-        Procurement data arrived as spreadsheets that no two vendors formatted
-        the same way. Header rows moved. Column names drifted. Someone
-        reconciled it manually, every month, while $6M of pandemic-era import
-        volume depended on getting it right.
+        For six years I ran procurement for a supplier to TSMC, UMC, PSMC, and
+        Micron, and kept meeting the same thing: work that ran on somebody&rsquo;s
+        attention, with a fix that looked obvious. So I built what I could — a
+        shipment tracker, a capacity model that carried $6M of imports through the
+        pandemic, and with a colleague, a tool that collapsed the monthly
+        reconciliation. They worked. They were also the limit of
+        what I could build without knowing how to design a database or run
+        anything in the cloud. That limit is why I went back to school.
       </p>
     </section>
 
     <!-- ============ 幕 2 — 收斂 ============ -->
     <section class="act" id="work">
       <p class="act-num mono">02 — The work</p>
-      <h2 class="act-title">Four times I closed that gap.</h2>
+      <h2 class="act-title">Five times I closed that gap.</h2>
 
       <article class="proj">
         <header class="proj-head">
           <h3>ERP Data Integration Tool</h3>
-          <p class="proj-meta mono">Mar 2023 - Dec 2023 · deployed internally</p>
+          <p class="proj-meta mono">Mar 2023 - Dec 2023 · collaborative project · deployed internally</p>
         </header>
         <p class="shift">
           <span class="shift-from">3 days</span>
@@ -115,6 +120,26 @@
 
       <article class="proj">
         <header class="proj-head">
+          <h3>Shipment &amp; Stock Tracker</h3>
+          <p class="proj-meta mono">Supertung Industrial · internal tool</p>
+        </header>
+        <p class="shift">
+          <span class="shift-from">asking around</span>
+          <span class="shift-arrow mono" aria-hidden="true">→</span>
+          <span class="shift-to mono">40% fewer status inquiries</span>
+          <span class="shift-what">one view everyone already knew how to read</span>
+        </p>
+        <dl class="proj-facts">
+          <dt class="mono">Problem</dt>
+          <dd>Anyone who needed to know where a shipment was, or how much stock was uncommitted, asked a person. Different people held different numbers, and the discrepancies only surfaced when an order was already promised.</dd>
+          <dt class="mono">Built</dt>
+          <dd>An Apps Script-backed Google Sheets tracker that pulls ERP inventory and inbound shipment data on a refresh schedule, then runs lookup logic and stock allocation calculations against it.</dd>
+        </dl>
+        <p class="tags mono"><span>Google Apps Script</span><span>Google Sheets</span><span>ERP data</span></p>
+      </article>
+
+      <article class="proj">
+        <header class="proj-head">
           <h3>RFID Inventory Service</h3>
           <p class="proj-meta mono">Aug 2017 - Jan 2018 · Brantabee Italia</p>
         </header>
@@ -130,7 +155,7 @@
           <dt class="mono">Built</dt>
           <dd>A Spring Boot REST service mapping scan events to inventory state transitions in PostgreSQL.</dd>
           <dt class="mono">Decision</dt>
-          <dd>Made the reorder APIs idempotent, so the same scan arriving twice resolves to one order instead of being deduplicated after the fact.</dd>
+          <dd>Made the reorder APIs idempotent by enforcing uniqueness constraints at the database level, so a repeated scan resolves to one order instead of being cleaned up afterwards.</dd>
         </dl>
         <p class="tags mono"><span>Java</span><span>Spring Boot</span><span>PostgreSQL</span></p>
       </article>
@@ -168,7 +193,7 @@
       <article class="proj">
         <header class="proj-head">
           <h3>Topic Voting Platform</h3>
-          <p class="proj-meta mono">Jan 2026 - Apr 2026 · 3-person team · sole developer</p>
+          <p class="proj-meta mono">Jan 2026 - Apr 2026 · 3-person team</p>
         </header>
         <p class="shift">
           <span class="shift-from">logic in the views</span>
@@ -184,7 +209,7 @@
           <dt class="mono">Decision</dt>
           <dd>Because no business rule lives in a view, all of it runs headless — 126 JUnit tests across 13 files, 39 of them on the controller alone.</dd>
         </dl>
-        <p class="tags mono"><span>Java</span><span>JavaFX</span><span>JUnit</span><span>Jackson</span></p>
+        <p class="tags mono"><span>Java</span><span>JavaFX</span><span>JUnit</span><span>MVC</span></p>
         <p class="proj-links mono">
           <a href="https://github.com/hstna/topic-voting-platform" rel="noopener noreferrer">
             Source<span aria-hidden="true"> ↗</span>
@@ -207,12 +232,13 @@
         <li class="path-item">
           <p class="path-date mono">Mar 2019 - Mar 2025</p>
           <h3>Supertung Industrial Co., Ltd.</h3>
-          <p class="path-sub">Procurement Analytics &amp; Automation Specialist <span class="muted">· Taichung, Taiwan</span></p>
+          <p class="path-sub">Overseas Procurement Specialist / Automation Developer <span class="muted">· Taichung, Taiwan</span></p>
           <p class="path-body">
-            Built the ERP integration tool and a Python capacity-planning model
-            forecasting warehouse utilization, sustaining $6M in import volume.
-            Ensured material availability for fab customers including TSMC, UMC,
-            PSMC, and Micron.
+            Built the ERP integration tool and a Python capacity-planning model that
+            joined purchase orders, ETA data, outbound commitments, and warehouse
+            limits. During the pandemic it carried 22 containers — $6M, roughly
+            1.8× a normal year — while holding warehouse utilisation under 85%.
+            Fab customers included TSMC, UMC, PSMC, and Micron.
           </p>
         </li>
         <li class="path-item">
