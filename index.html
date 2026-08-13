@@ -109,9 +109,11 @@
         </p>
         <dl class="proj-facts">
           <dt class="mono">Problem</dt>
-          <dd>Procurement data arrived as spreadsheets that no two vendors formatted the same way. Header rows moved, column names drifted, and someone reconciled it by hand every month.</dd>
+          <dd>Inventory analysis meant pulling 8+ report types out of our ERP — purchasing, sales, stock movement — each with a
+            different layout, covering 1,000+ SKUs. Consolidating them by hand was the bottleneck before any analysis could start.</dd>
           <dt class="mono">Built</dt>
-          <dd>A Python app that auto-detects the header row in inconsistent Excel layouts and maps raw columns to 15 canonical fields by regex.</dd>
+          <dd>A Python app that auto-detects the header row in inconsistent Excel layouts and maps raw columns to 15 canonical fields by regex,
+            and drops everything else — one sheet with just the items and quantities needed.</dd>
           <dt class="mono">Decision</dt>
           <dd>Ingestion, transformation, and validation are separate layers, so onboarding a new ERP format means adding a regex — not touching the pipeline.</dd>
         </dl>
